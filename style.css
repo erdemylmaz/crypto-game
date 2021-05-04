@@ -1,0 +1,163 @@
+:root {
+    --blue: #5271ff;
+    --darkBlue: #5271ff55;
+}
+
+body {
+    background-color: black;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: white;
+    font-weight: 300;
+}
+
+.app {
+    width: 95%;
+    min-height: 90vh;
+    margin-left: 2.5%;
+}
+
+.header {
+    width: 100%;
+    height: 96px;
+
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.logo {
+    width: 96px;
+    height: 96px;
+    margin-right: auto;
+}
+
+.logo-img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.account-link {
+    color: #4a4a4a;
+    text-decoration: none;
+    transition: 500ms;
+    font-size: 24px;
+}
+
+.account-link:hover {
+    color: var(--blue);
+}
+
+.hr {
+    width: 100%;
+    height: 1px;
+    background-color: #4a4a4a;
+
+    margin-bottom: 12px;
+}
+
+.categories {
+    width: 100%;
+    height: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.category {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 96px;
+    height: 100%;
+    margin: 8px;
+    background-color: var(--darkBlue);
+    color: #aaa;
+    font-size: 14px;
+
+    border-radius: 4px;
+
+    transition: 500ms;
+}
+
+.category:hover {
+    color: white;
+    background-color: var(--blue);
+    cursor: pointer;
+}
+
+.increasing {
+    color: greenyellow;
+}
+
+.decreasing {
+    color: red;
+}
+
+.coins-table {
+    width: 100%;
+}
+
+td {
+    width: 20%;
+    height: 48px;
+}
+
+thead tr td {
+    color: #4a4a4a;
+}
+
+.symbol-td {
+    width: 8%;
+}
+
+.name-td {
+    width: 32%;
+}
+
+.add-to-fav-btn {
+    text-align: center;
+    background-color: var(--darkBlue);
+    width: 50%;
+    height: 36px;
+    border-radius: 4px;
+    color: #4a4a4a;
+    transition: 500ms;
+
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.add-to-fav-btn:hover {
+    cursor: pointer;
+    color: white;
+    background-color: var(--blue);
+}
+
+.buy-coin-td {
+    width: 10%;
+}
+
+.buy-coin-btn {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    height: 36px;
+    width: 75%;
+    border-radius: 4px;
+
+    color: #4a4a4a;
+    background-color: var(--darkBlue);
+    transition: 500ms;
+
+    text-decoration: none;
+}
+
+.buy-coin-btn:hover {
+    cursor: pointer;
+    color: white;
+    background-color: var(--blue);
+}
