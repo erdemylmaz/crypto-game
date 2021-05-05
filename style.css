@@ -1,6 +1,6 @@
 :root {
     --blue: #5271ff;
-    --darkBlue: #5271ff55;
+    --darkBlue: #5271ff88;
     --mainBackground: rgb(241, 243, 245);
     --background: rgb(246, 249, 252);
     --background2: #FAFBFC;
@@ -167,6 +167,7 @@ body {
     width: 256px;
     height: 96px;
     margin-right: auto;
+    color: white;
 }
 
 .logo-img {
@@ -243,11 +244,11 @@ body {
 }
 
 .increasing {
-    color: #00B300;
+    color: #00C206;
 }
 
 .decreasing {
-    color: #F20519;
+    color: #E01200;
 }
 
 .coins-table {
@@ -309,7 +310,7 @@ thead tr td {
     width: 75%;
     border-radius: 4px;
 
-    color: #4a4a4a;
+    color: #aaa;
     background-color: var(--darkBlue);
     transition: 500ms;
 
@@ -331,5 +332,9 @@ thead tr td {
 }
 
 .coin:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.bright .coin:hover {
     background-color: var(--background2);
 }

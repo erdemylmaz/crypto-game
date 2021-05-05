@@ -8,12 +8,28 @@
     --brightBlue: rgb(22, 82, 240);
 }
 
-.account-link {
+.logo {
+    color: white;
+}
+
+.brigth .logo {
+    color: black;
+}
+
+.bright .account-link {
     color: var(--brightBlue);
 }
 
-.portfolio {
+.account-link {
+    color: var(--blue);
+}
+
+.bright .portfolio {
     background-color: var(--background);
+}
+
+.portfolio {
+    background-color: black;
     width: 100%;
     min-height: 90vh;
     margin-left: -8px;
@@ -26,9 +42,14 @@
     width: 100%;
 }
 
-.p-table-td {
+.bright .p-table-td {
     width: 20%;
     border-bottom: 1px solid var(--mainBackground);
+}
+
+.p-table-td {
+    width: 20%;
+    border-bottom: 1px solid #4a4a4a;
 }
 
 .symbol {
@@ -39,7 +60,11 @@
     width: 30%;
 }
 
-.buy-btn {
+.bright .name {
+    width: 30%;
+}
+
+.bright .buy-btn {
     width: 75%;
     height: 36px;
     background-color: var(--brightBlue);
@@ -49,28 +74,63 @@
     color: white;
 
     border-radius: 4px;
+    transition: 500ms;
 }
 
-.buy-btn:hover {
+.bright .buy-btn:hover {
     cursor: pointer;
     transition: 500ms;
     background-color: var(--hoverBlue);
 }
 
-tfoot tr td {
-    color: black;
-    padding-top: 36px;
+.buy-btn {
+    background-color: var(--darkBlue);
+    width: 75%;
+    height: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+
+    border-radius: 4px;
+    transition: 500ms;
 }
 
-.withdraw {
+.buy-btn:hover {
+    background-color: var(--blue);
+    cursor: pointer;
+}
+
+.bright tfoot tr td {
+    color: black;
+}
+
+tfoot tr td {
+    padding-top: 36px;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.bright .withdraw {
     background-color: transparent;
     border: 1px solid var(--brightBlue);
     color: black; 
-    transition: 250ms;
+    transition: 500ms;
+}
+
+.bright .withdraw:hover {
+    transition: 500ms;
+    color: white;
+    background-color: var(--hoverBlue);
+}
+
+.withdraw {
+    border: 1px solid var(--darkBlue);
+    color: white;
+    transition: 500ms;
+    background-color: transparent;
 }
 
 .withdraw:hover {
-    transition: 250ms;
-    color: white;
-    background-color: var(--hoverBlue);
+    cursor: pointer;
+    background-color: var(--blue);
 }
