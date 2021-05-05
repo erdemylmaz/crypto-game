@@ -25,6 +25,7 @@ class Coins {
             symbol: 'BTC/USDT',
             imageLink: '',
             price: 58756,
+            amount: 0,
             isOnFavorites: false,
             category: 'best',
             isUserHave: false,
@@ -34,6 +35,7 @@ class Coins {
             symbol: 'XRP/USDT',
             imageLink: '',
             price: 1.44,
+            amount: 0,
             isOnFavorites: false,
             category: 'new',
             isUserHave: false,
@@ -43,6 +45,7 @@ class Coins {
             symbol: 'TRX/USDT',
             imageLink: '',
             price: 0.1274,
+            amount: 0,
             isOnFavorites: false,
             category: 'new',
             isUserHave: false,
@@ -52,6 +55,7 @@ class Coins {
             symbol: 'ETH/USDT',
             imageLink: '',
             price: 3333,
+            amount: 0,
             isOnFavorites: false,
             category: "best",
             isUserHave: false,
@@ -61,6 +65,7 @@ class Coins {
             symbol: 'LTC/USDT',
             imageLink: '',
             price: 328,
+            amount: 0,
             isOnFavorites: false,
             category: "best",
             isUserHave: false,
@@ -70,6 +75,7 @@ class Coins {
             symbol: 'DOT/USDT',
             imageLink: '',
             price: 37.20,
+            amount: 0,
             isOnFavorites: false,
             category: "new",
             isUserHave: false,
@@ -79,10 +85,21 @@ class Coins {
             symbol: 'FET/USDT',
             imageLink: '',
             price: 0.57,
+            amount: 0,
             isOnFavorites: false,
             category: "new",
             isUserHave: false,
-        }
+        },
+        {
+            name: 'Tether-USD',
+            symbol: 'USDT/USD',
+            imageLink: '',
+            price: 1,
+            amount: 100,
+            isOnFavorites: false,
+            category: "best",
+            isUserHave: true,
+        },
     ];
 }
 
@@ -91,6 +108,8 @@ const coins = new Coins();
 if(localStorage.getItem('coins')) {
     coins.coins = JSON.parse(localStorage.getItem('coins'));
 }
+
+localStorage.setItem('coins', JSON.stringify(coins.coins));
 
 const coinTable = document.querySelector('.coin-table');
 
@@ -104,7 +123,7 @@ coins.coins.map((coin) => {
     tr.innerHTML = `
         <td class="symbol-td coin-td">${coin.symbol}</td>
         <td class="name-td coin-td">${coin.name}</td>
-        <td class="price-td coin-td ${coin.name}-price">$ ${coin.price.toFixed(6)}</td>
+        <td class="price-td coin-td ${coin.name}-price">$ ${coin.price.toFixed(9)}</td>
         <td class="buy-coin-td coin-td"><a href="" class="buy-coin-btn">Buy / Sell</a></td>
         <td class="add-to-fav-td coin-td"><div class="add-to-fav-btn"><i class="${coin.isOnFavorites ? "fas fa-heart active" : "far fa-heart"} add-to-fav"></i></div></td>
     `;
@@ -122,6 +141,7 @@ const litePriceDOM = document.querySelector('.Lite-Coin-price');
 const ethereumPriceDOM = document.querySelector('.Ethereum-price');
 const dotPriceDOM = document.querySelector('.Polkadot-price');
 const fetchPriceDOM = document.querySelector('.Fetch-ai-price');
+const tetherPriceDOM = document.querySelector('.Tether-USD-price');
 
 setInterval(() => {
     coins.coins.forEach((coin) => {
@@ -262,11 +282,11 @@ setInterval(() => {
 
             fetchPriceDOM.parentNode.classList.remove('decreasing');
             fetchPriceDOM.parentNode.classList.remove('increasing');
+        } else if(coin.name == "Tether-USD") {
+            tetherPriceDOM.textContent = "$ 1.00";
         }
 
         localStorage.setItem('coins', JSON.stringify(coins.coins));
-
-        console.log(coin.price);
     });
 }, 1000);
 

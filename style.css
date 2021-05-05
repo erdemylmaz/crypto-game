@@ -329,3 +329,7 @@ thead tr td {
 .coin {
     color: #7a7a7a;
 }
+
+.coin:hover {
+    background-color: var(--background2);
+}
