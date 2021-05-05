@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto</title>
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../style.css"> 
+    <!-- CSS -->
+    <link rel="stylesheet" href="./trade-style.css">
+    <!-- Icons -->
+    <script src="https://kit.fontawesome.com/fa178081cb.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="app">
+        <div class="header">
+            <a href="../index.html" class="logo">
+                <img src="../images/Crypto.png" class="logo-img">
+                <div class="logo-text">All coins one place</div>
+            </a>
+
+            <div class="account">
+                <a href="../account/index.html" class="account-link"><i class="fas fa-user-circle"></i> <span class="account-text">Account</span></a>
+                <div class="navbar-btn"><i class="fas fa-bars bar-icon"></i></div>
+            </div>
+        </div>
+        <div class="hr header-hr"></div>
+
+        <div class="trade-area">
+            <div class="coin-name">DOGE-USDT</div>
+            <div class="coin-price">$ 0.00000</div>
+            <div class="buy-sell-area">
+                <div class="trade-categories">
+                    <div class="buy-category-btn trade-category buy-active">Buy</div>
+                    <div class="sell-category-btn trade-category">Sell</div>
+                </div>
+
+                <div class="buy">
+                    <form class="trade-form-buy">
+                        <input type="number" class="amount-input-buy" placeholder="Amount">
+                        <p></p>
+                        <input type="text" class="total-price-input-buy" placeholder="USDT">
+                        <p class="current-money">USDT: 100</p>
+                        <input type="submit" value="Buy!">
+                    </form>
+                </div>
+
+                <div class="sell">
+                    <form class="trade-form-sell">
+                        <input type="number" class="amount-input-sell">
+                        <p></p>
+                        <input type="submit" value="Sell!">
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+   
+    <div class="navbar">
+        <div class="items">
+            <div class="item"><a class="item-link">Settings</a></div>
+            <div class="item mode-btn change-btn">Change Theme</div>
+            <div class="item about">About Us</div>
+            <div class="item contact">Contact</div>
+            <div class="item deposit">Deposit Money</div>
+            <div class="item mode-btn restart-btn">Restart</div>
+        </div>
+    </div>
+
+<!-- JS -->
+<script src="./trade.js"></script>
+</body>
+</html>

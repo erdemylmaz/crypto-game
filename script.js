@@ -2,7 +2,7 @@ class Coins {
     coins = [
         {
             name: 'Shiba-Inu',
-            symbol: 'SHIB/USDT',
+            symbol: 'SHIB-USDT',
             imageLink: '',
             price: 0.000001652,
             amount: 100000000,
@@ -12,7 +12,7 @@ class Coins {
         },
         {
             name: 'Doge-Coin',
-            symbol: 'DOGE/USDT',
+            symbol: 'DOGE-USDT',
             imageLink: '',
             price: 0.62346,
             amount: 1500,
@@ -22,7 +22,7 @@ class Coins {
         },
         {
             name: 'Bitcoin',
-            symbol: 'BTC/USDT',
+            symbol: 'BTC-USDT',
             imageLink: '',
             price: 58756,
             amount: 0,
@@ -32,7 +32,7 @@ class Coins {
         },
         {
             name: 'Ripple',
-            symbol: 'XRP/USDT',
+            symbol: 'XRP-USDT',
             imageLink: '',
             price: 1.44,
             amount: 0,
@@ -42,7 +42,7 @@ class Coins {
         },
         {
             name: 'Tron',
-            symbol: 'TRX/USDT',
+            symbol: 'TRX-USDT',
             imageLink: '',
             price: 0.1274,
             amount: 0,
@@ -52,7 +52,7 @@ class Coins {
         },
         {
             name: 'Ethereum',
-            symbol: 'ETH/USDT',
+            symbol: 'ETH-USDT',
             imageLink: '',
             price: 3333,
             amount: 0,
@@ -62,7 +62,7 @@ class Coins {
         },
         {
             name: 'Lite-Coin',
-            symbol: 'LTC/USDT',
+            symbol: 'LTC-USDT',
             imageLink: '',
             price: 328,
             amount: 0,
@@ -72,7 +72,7 @@ class Coins {
         },
         {
             name: 'Polkadot',
-            symbol: 'DOT/USDT',
+            symbol: 'DOT-USDT',
             imageLink: '',
             price: 37.20,
             amount: 0,
@@ -82,7 +82,7 @@ class Coins {
         },
         {
             name: 'Fetch-ai',
-            symbol: 'FET/USDT',
+            symbol: 'FET-USDT',
             imageLink: '',
             price: 0.57,
             amount: 0,
@@ -90,17 +90,9 @@ class Coins {
             category: "new",
             isUserHave: false,
         },
-        {
-            name: 'Tether-USD',
-            symbol: 'USDT/USD',
-            imageLink: '',
-            price: 1,
-            amount: 100,
-            isOnFavorites: false,
-            category: "best",
-            isUserHave: true,
-        },
     ];
+
+    money = 100;
 }
 
 const coins = new Coins();
@@ -109,7 +101,12 @@ if(localStorage.getItem('coins')) {
     coins.coins = JSON.parse(localStorage.getItem('coins'));
 }
 
+if(localStorage.getItem('cryptoMoney')) {
+    coins.money = parseInt(localStorage.getItem('cryptoMoney'));
+}
+
 localStorage.setItem('coins', JSON.stringify(coins.coins));
+localStorage.setItem('cryptoMoney', coins.money);
 
 const coinTable = document.querySelector('.coin-table');
 
@@ -124,7 +121,7 @@ coins.coins.map((coin) => {
         <td class="symbol-td coin-td">${coin.symbol}</td>
         <td class="name-td coin-td">${coin.name}</td>
         <td class="price-td coin-td ${coin.name}-price">$ ${coin.price.toFixed(9)}</td>
-        <td class="buy-coin-td coin-td"><a href="" class="buy-coin-btn">Buy / Sell</a></td>
+        <td class="buy-coin-td coin-td"><a href="./${coin.symbol}/trade.html" class="buy-coin-btn">Buy / Sell</a></td>
         <td class="add-to-fav-td coin-td"><div class="add-to-fav-btn"><i class="${coin.isOnFavorites ? "fas fa-heart active" : "far fa-heart"} add-to-fav"></i></div></td>
     `;
 
@@ -401,10 +398,10 @@ resetGame = () => {
         coinTable.innerHTML = "";
         showNavbar();
 
-        coins = [
+        coins.coins = [
             {
                 name: 'Shiba-Inu',
-                symbol: 'SHIB/USDT',
+                symbol: 'SHIB-USDT',
                 imageLink: '',
                 price: 0.000001652,
                 amount: 100000000,
@@ -414,7 +411,7 @@ resetGame = () => {
             },
             {
                 name: 'Doge-Coin',
-                symbol: 'DOGE/USDT',
+                symbol: 'DOGE-USDT',
                 imageLink: '',
                 price: 0.62346,
                 amount: 1500,
@@ -424,7 +421,7 @@ resetGame = () => {
             },
             {
                 name: 'Bitcoin',
-                symbol: 'BTC/USDT',
+                symbol: 'BTC-USDT',
                 imageLink: '',
                 price: 58756,
                 amount: 0,
@@ -434,7 +431,7 @@ resetGame = () => {
             },
             {
                 name: 'Ripple',
-                symbol: 'XRP/USDT',
+                symbol: 'XRP-USDT',
                 imageLink: '',
                 price: 1.44,
                 amount: 0,
@@ -444,7 +441,7 @@ resetGame = () => {
             },
             {
                 name: 'Tron',
-                symbol: 'TRX/USDT',
+                symbol: 'TRX-USDT',
                 imageLink: '',
                 price: 0.1274,
                 amount: 0,
@@ -454,7 +451,7 @@ resetGame = () => {
             },
             {
                 name: 'Ethereum',
-                symbol: 'ETH/USDT',
+                symbol: 'ETH-USDT',
                 imageLink: '',
                 price: 3333,
                 amount: 0,
@@ -464,7 +461,7 @@ resetGame = () => {
             },
             {
                 name: 'Lite-Coin',
-                symbol: 'LTC/USDT',
+                symbol: 'LTC-USDT',
                 imageLink: '',
                 price: 328,
                 amount: 0,
@@ -474,7 +471,7 @@ resetGame = () => {
             },
             {
                 name: 'Polkadot',
-                symbol: 'DOT/USDT',
+                symbol: 'DOT-USDT',
                 imageLink: '',
                 price: 37.20,
                 amount: 0,
@@ -484,24 +481,14 @@ resetGame = () => {
             },
             {
                 name: 'Fetch-ai',
-                symbol: 'FET/USDT',
+                symbol: 'FET-USDT',
                 imageLink: '',
                 price: 0.57,
                 amount: 0,
                 isOnFavorites: false,
                 category: "new",
                 isUserHave: false,
-            },
-            {
-                name: 'Tether-USD',
-                symbol: 'USDT/USD',
-                imageLink: '',
-                price: 1,
-                amount: 100,
-                isOnFavorites: false,
-                category: "best",
-                isUserHave: true,
-            },
+            }
         ];
         
         coins.coins.map((coin) => {
@@ -514,7 +501,7 @@ resetGame = () => {
                 <td class="symbol-td coin-td">${coin.symbol}</td>
                 <td class="name-td coin-td">${coin.name}</td>
                 <td class="price-td coin-td ${coin.name}-price">$ ${coin.price}</td>
-                <td class="buy-coin-td coin-td"><a href="" class="buy-coin-btn">Buy / Sell</a></td>
+                <td class="buy-coin-td coin-td"><a href="./${coin.symbol}/trade.html" class="buy-coin-btn">Buy / Sell</a></td>
                 <td class="add-to-fav-td coin-td"><div class="add-to-fav-btn"><i class="${coin.isOnFavorites ? "fas fa-heart active" : "far fa-heart"} add-to-fav"></i></div></td>
             `;
 
