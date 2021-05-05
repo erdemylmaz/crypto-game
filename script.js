@@ -5,14 +5,20 @@ class Coins {
             symbol: 'SHIB/USDT',
             imageLink: '',
             price: 0.000001652,
+            amount: 100000000,
             isOnFavorites: false,
+            category: 'shit',
+            isUserHave: true,
         },
         {
             name: 'Doge-Coin',
             symbol: 'DOGE/USDT',
             imageLink: '',
-            price: 0.53495,
+            price: 0.62346,
+            amount: 1500,
             isOnFavorites: false,
+            category: 'shit',
+            isUserHave: true,
         },
         {
             name: 'Bitcoin',
@@ -20,6 +26,8 @@ class Coins {
             imageLink: '',
             price: 58756,
             isOnFavorites: false,
+            category: 'best',
+            isUserHave: false,
         },
         {
             name: 'Ripple',
@@ -27,6 +35,8 @@ class Coins {
             imageLink: '',
             price: 1.44,
             isOnFavorites: false,
+            category: 'new',
+            isUserHave: false,
         },
         {
             name: 'Tron',
@@ -34,6 +44,8 @@ class Coins {
             imageLink: '',
             price: 0.1274,
             isOnFavorites: false,
+            category: 'new',
+            isUserHave: false,
         },
         {
             name: 'Ethereum',
@@ -41,6 +53,8 @@ class Coins {
             imageLink: '',
             price: 3333,
             isOnFavorites: false,
+            category: "best",
+            isUserHave: false,
         },
         {
             name: 'Lite-Coin',
@@ -48,6 +62,8 @@ class Coins {
             imageLink: '',
             price: 328,
             isOnFavorites: false,
+            category: "best",
+            isUserHave: false,
         },
         {
             name: 'Polkadot',
@@ -55,6 +71,8 @@ class Coins {
             imageLink: '',
             price: 37.20,
             isOnFavorites: false,
+            category: "new",
+            isUserHave: false,
         },
         {
             name: 'Fetch-ai',
@@ -62,6 +80,8 @@ class Coins {
             imageLink: '',
             price: 0.57,
             isOnFavorites: false,
+            category: "new",
+            isUserHave: false,
         }
     ];
 }
@@ -77,6 +97,7 @@ const coinTable = document.querySelector('.coin-table');
 coins.coins.map((coin) => {
     let tr = document.createElement('tr');
     tr.classList.add('coin');
+    tr.classList.add(`${coin.category}`);
 
     coin.isIncreasing ? tr.classList.add('increasing') : tr.classList.add('decreasing');
 
@@ -244,6 +265,8 @@ setInterval(() => {
         }
 
         localStorage.setItem('coins', JSON.stringify(coins.coins));
+
+        console.log(coin.price);
     });
 }, 1000);
 
@@ -312,13 +335,6 @@ if(localStorage.getItem('cryptoTheme')) {
 }
 
 // add to fav
-
-class Favorites {
-
-}
-
-const favorites = new Favorites();
-
 const addToFavBtns = document.querySelectorAll('.add-to-fav');
 
 addToFav = (e) => {
@@ -454,3 +470,89 @@ resetGame = () => {
 }
 
 resetBtn.addEventListener('click', resetGame);
+
+// category
+const allCoins = document.querySelectorAll('.coin');
+const allCategory = document.querySelector('.all-category');
+const newCategory = document.querySelector('.new-category');
+const bestCategory = document.querySelector('.best-category');
+const shitCategory = document.querySelector('.shit-category');
+const favCategory = document.querySelector('.fav-category');
+
+// new category
+showNewCoins = (e) => {
+    Array.from(allCoins).forEach((coin) => {
+        for(let x = 0; x < coins.coins.length; x++) {
+            if(coin.firstElementChild.nextElementSibling.textContent == coins.coins[x].name) {
+                if(coins.coins[x].category.toLowerCase() == "new") {
+                    coin.style.display = "table-row";
+                } else {
+                    coin.style.display = "none";
+                }
+            }
+        }
+    });
+}
+
+newCategory.addEventListener('click', showNewCoins);
+
+// best category
+showBestCoins = (e) => {
+    Array.from(allCoins).forEach((coin) => {
+        for(let x = 0; x < coins.coins.length; x++) {
+            if(coin.firstElementChild.nextElementSibling.textContent == coins.coins[x].name) {
+                if(coins.coins[x].category.toLowerCase() == "best") {
+                    coin.style.display = "table-row";
+                } else {
+                    coin.style.display = "none";
+                }
+            }
+        }
+    });
+}
+
+bestCategory.addEventListener('click', showBestCoins);
+
+// shit category
+showShitCoins = (e) => {
+    Array.from(allCoins).forEach((coin) => {
+        for(let x = 0; x < coins.coins.length; x++) {
+            if(coin.firstElementChild.nextElementSibling.textContent == coins.coins[x].name) {
+                if(coins.coins[x].category.toLowerCase() == "shit") {
+                    coin.style.display = "table-row";
+                } else {
+                    coin.style.display = "none";
+                }
+            }
+        }
+    });
+}
+
+shitCategory.addEventListener('click', showShitCoins);
+
+// all category
+showAllCoins = (e) => {
+    Array.from(allCoins).forEach((coin) => {
+        coin.style.display = "table-row";
+    });
+}
+
+allCategory.addEventListener('click', showAllCoins);
+
+// show favorites
+
+showFavorites = (e) => {
+    Array.from(allCoins).forEach((coin) => {
+        for(let x = 0; x < coins.coins.length; x++) {
+            if(coin.firstElementChild.nextElementSibling.textContent == coins.coins[x].name) {
+                if(coins.coins[x].isOnFavorites) {
+                    coin.style.display = "table-row";
+                } else {
+                    coin.style.display = "none";
+                }
+            }
+        }
+    });
+}
+
+favCategory.addEventListener('click', showFavorites);

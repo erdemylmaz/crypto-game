@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Acoount</title>
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../style.css">
+    <!-- CSS -->
+    <link rel="stylesheet" href="./style.css">
+    <!-- Icon -->
+    <script src="https://kit.fontawesome.com/fa178081cb.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="app">
+        <div class="header">
+            <a href="../index.html" class="logo">
+                <img src="../images/Crypto.png" class="logo-img">
+                <div class="logo-text">All coins one place</div>
+            </a>
+
+            <div class="account">
+                <a href="#" class="account-link"><i class="fas fa-user-circle"></i> <span class="account-text">Account</span></a>
+                <div class="navbar-btn"><i class="fas fa-bars bar-icon"></i></div>
+            </div>
+        </div>
+        <div class="hr header-hr"></div>
+
+        <div class="portfolio">
+            <table class="portfolio-table">
+                <thead>
+                    <tr>
+                        <td class="p-table-td symbol">Symbol</td>
+                        <td class="p-table-td name">Name</td>
+                        <td class="p-table-td amount">Amount</td>
+                        <td class="p-table-td total-price">Total Price</td>
+                        <td class="p-table-td buy-sell">Buy / Sell</td>
+                    </tr>
+                </thead>
+
+                <tbody class="coins">
+                </tbody>
+
+                <tfoot>
+                    <tr>
+                        <td class="footer-td first">Total Money:</td>
+                        <td class="footer-td second"></td>
+                        <td class="footer-td third"></td>
+                        <td class="footer-td total-money">$ 0</td>
+                        <td class="footer-td fourth"><div class="buy-btn withdraw">Withdraw</div></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+
+    </div>
+
+    <div class="navbar">
+        <div class="items">
+            <div class="item"><a class="item-link">Settings</a></div>
+            <div class="item mode-btn change-btn">Change Mode</div>
+            <div class="item mode-btn">About Us</div>
+            <div class="item mode-btn">Contact</div>
+            <div class="item mode-btn restart-btn">Restart</div>
+        </div>
+    </div>
+
+<script src="./account.js"></script>
+<!-- Main js -->
+</body>
+</html>
