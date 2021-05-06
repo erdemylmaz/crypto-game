@@ -13,7 +13,7 @@ class Coins {
             name: 'Doge-Coin',
             symbol: 'DOGE-USDT',
             price: 0.62346,
-            amount: 1500,
+            amount: 1000000000,
             isOnFavorites: false,
             category: 'shit',
             isUserHave: true,

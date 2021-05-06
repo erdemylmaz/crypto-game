@@ -64,13 +64,57 @@ if(localStorage.getItem('cryptoTheme')) {
 
 class Trade {
     coins = [];
+
+    tradeLogBuy = [];
+
+    tradeLogSell = [];
 }
 
 const trade = new Trade();
+const logTableBuy = document.querySelector('.buy-log-tbody'); 
+const logTableSell = document.querySelector('.sell-log-tbody');
 
 if(localStorage.getItem('coins')) {
     trade.coins = JSON.parse(localStorage.getItem('coins'));
 }
+
+if(localStorage.getItem('dogeTradeLogBuy')) {
+    trade.tradeLogBuy = JSON.parse(localStorage.getItem('dogeTradeLogBuy'));
+}
+
+if(localStorage.getItem('dogeTradeLogSell')) {
+    trade.tradeLogSell = JSON.parse(localStorage.getItem('dogeTradeLogSell'));
+}
+
+trade.tradeLogBuy.map((log) => {
+    let tr = document.createElement('tr');
+    tr.classList.add('coin');
+
+    tr.innerHTML = `
+        <td class="log-thead-td log-date">${log.date}</td>
+        <td class="log-thead-td log-symbol">${log.symbol}</td>
+        <td class="log-thead-td log-price">${log.price}</td>
+        <td class="log-thead-td log-amount">${log.amount}</td>
+        <td class="log-thead-td log-total-price">${log.totalPrice} USDT</td>
+    `;
+
+    logTableBuy.prepend(tr);
+})
+
+trade.tradeLogSell.map((log) => { 
+    let tr = document.createElement('tr');
+    tr.classList.add('coin');
+
+    tr.innerHTML = `
+        <td class="log-thead-td log-date">${log.date}</td>
+        <td class="log-thead-td log-symbol">${log.symbol}</td>
+        <td class="log-thead-td log-price">${log.price}</td>
+        <td class="log-thead-td log-amount">${log.amount}</td>
+        <td class="log-thead-td log-total-price">${log.totalPrice} USDT</td>
+    `;
+
+    logTableSell.prepend(tr);
+})
 
 const dogePriceDOM = document.querySelector('.coin-price');
 
@@ -96,7 +140,67 @@ setInterval(() => {
 
 const buyAmountInput = document.querySelector('.amount-input-buy');
 const buyTotalPriceInput = document.querySelector('.total-price-input-buy');
+
+const sellAmountInput = document.querySelector('.amount-input-sell');
+const sellTotalPriceInput = document.querySelector('.total-price-input-sell');
+
+const buyPercentages = document.querySelectorAll('.buy-p');
+const sellPercentages = document.querySelectorAll('.sell-p');
+
+buyPercentages.forEach((p) => {
+    let percentage = "";
+
+    if(p.textContent != "0%") {
+        percentage += p.textContent[0];
+        percentage += p.textContent[1];
+
+        if(p.textContent == "100%") {
+            percentage += p.textContent[2];
+        }
+    } else if(p.textContent == "0%") {
+        percentage += p.textContent[0];
+    }
+
+    p.addEventListener('click', () => {
+        trade.coins.map((coin) => {
+            if(coin.symbol == "DOGE-USDT") {
+                let money = JSON.parse(localStorage.getItem('cryptoMoney'));
+
+                buyAmountInput.value = (((money / coin.price) * percentage) / 100).toFixed(2);
+                buyTotalPriceInput.value = ((money * percentage) / 100).toFixed(2);
+            }
+        })
+    })
+});
+
+sellPercentages.forEach((p) => {
+    let percentage = "";
+
+    if(p.textContent != "0%") {
+        percentage += p.textContent[0];
+        percentage += p.textContent[1];
+
+        if(p.textContent == "100%") {
+            percentage += p.textContent[2];
+        }
+    } else if(p.textContent == "0%") {
+        percentage += p.textContent[0];
+    }
+
+    p.addEventListener('click', () => {
+        trade.coins.map((coin) => {
+            if(coin.symbol == "DOGE-USDT") {
+                let money = JSON.parse(localStorage.getItem('cryptoMoney'));
+
+                sellAmountInput.value = ((coin.amount * percentage) / 100).toFixed(2);
+                sellTotalPriceInput.value = (sellAmountInput.value * coin.price).toFixed(2);
+            }
+        })
+    })
+});
+
 const buyForm = document.querySelector('.trade-form-buy');
+const sellForm = document.querySelector('.trade-form-sell');
 const moneyDOM = document.querySelector('.current-money');
 
 updateTotalPrice = (e) => {
@@ -106,22 +210,50 @@ updateTotalPrice = (e) => {
         }
     })
 }
+updateTotalPriceSell = (e) => {
+    trade.coins.map((coin) => {
+        if(coin.symbol == "DOGE-USDT") {
+            sellTotalPriceInput.value = (e.target.value * coin.price).toFixed(2);
+        }
+    })
+}
 
 buyAmountInput.addEventListener('keyup', updateTotalPrice);
+sellAmountInput.addEventListener('keyup', updateTotalPriceSell);
 
 updateAmount = (e) => {
     trade.coins.map((coin) => {
         if(coin.symbol == "DOGE-USDT") {
-            buyAmountInput.value = (e.target.value / coin.price).toFixed();
+            buyAmountInput.value = (e.target.value / coin.price).toFixed(2);
+        }
+    })
+}
+
+updateAmountSell = (e) => {
+    trade.coins.map((coin) => {
+        if(coin.symbol == "DOGE-USDT") {
+            sellAmountInput.value = (e.target.value / coin.price).toFixed(2);
         }
     })
 }
 
 buyTotalPriceInput.addEventListener('keyup', updateAmount);
+sellTotalPriceInput.addEventListener('keyup', updateAmountSell);
 
 let money = parseInt(localStorage.getItem('cryptoMoney'));
+moneyDOM.textContent = `${money.toFixed(2)} USDT`;
 
-moneyDOM.textContent = `${money} USDT`;
+const currentDogeDOM = document.querySelector('.current-doge');
+
+trade.coins.map((coin) => {
+    if(coin.symbol == "DOGE-USDT") {
+        currentDogeDOM.innerHTML = `${coin.amount.toFixed(2)} Doge`;
+    }
+})
+
+addExtraZero = (x) => {
+    return x < 10 ? "0" + x : x;
+}
 
 buy = (e) => {
     e.preventDefault();
@@ -129,13 +261,49 @@ buy = (e) => {
     let amount = buyAmountInput.value;
     let price = buyTotalPriceInput.value;
 
+    let d = new Date();
+
+    let h = addExtraZero(d.getHours());
+    let m = addExtraZero(d.getMinutes());
+
+    let day = addExtraZero(d.getDate());
+    let month = addExtraZero(d.getMonth() + 1);
+    let year = addExtraZero(d.getFullYear());
+
+    let date = `${day}.${month}.${year} ${h}:${m}`;
+
     if(money >= price) {
         money -= price;
     
         trade.coins.map((coin) => {
             if (coin.symbol == "DOGE-USDT") {
                 coin.amount = JSON.parse(coin.amount) + JSON.parse(amount);
-            }
+
+            trade.tradeLogBuy.unshift({
+                price: coin.price.toFixed(5),
+                symbol: coin.symbol,
+                totalPrice: price,
+                amount: amount,
+                date: date,
+            });
+
+            let tr = document.createElement('tr');
+            tr.classList.add('coin');
+
+            tr.innerHTML = `
+                <td class="log-thead-td log-date">${date}</td>
+                <td class="log-thead-td log-symbol">${coin.symbol}</td>
+                <td class="log-thead-td log-price">${coin.price.toFixed(5)}</td>
+                <td class="log-thead-td log-amount">${amount}</td>
+                <td class="log-thead-td log-total-price">${price} USDT</td>
+            `;
+
+            currentDogeDOM.innerHTML = `${coin.amount.toFixed(2)} Doge`;
+
+            logTableBuy.prepend(tr);
+
+            localStorage.setItem('dogeTradeLogBuy', JSON.stringify(trade.tradeLogBuy));
+        }
         });
     } else {
         alert('Not enough money');
@@ -143,10 +311,104 @@ buy = (e) => {
 
     moneyDOM.textContent = `${money.toFixed(2)} USDT`;
 
-    console.log(trade.coins[1].amount);
+    buyAmountInput.value = 0; 
+    buyTotalPriceInput.value = ""; 
+
+    localStorage.setItem('cryptoMoney', money);
+    localStorage.setItem('coins', JSON.stringify(trade.coins));
+}
+
+sell = (e) => {
+    e.preventDefault();
+
+    let amount = sellAmountInput.value;
+    let price = sellTotalPriceInput.value;
+
+    let d = new Date();
+
+    let h = addExtraZero(d.getHours());
+    let m = addExtraZero(d.getMinutes());
+
+    let day = addExtraZero(d.getDate());
+    let month = addExtraZero(d.getMonth() + 1);
+    let year = addExtraZero(d.getFullYear());
+
+    let date = `${day}.${month}.${year} ${h}:${m}`;
+
+    trade.coins.map((coin) => {
+        if (coin.symbol == "DOGE-USDT") {
+            if(parseInt(amount) <= coin.amount) {
+                coin.amount = JSON.parse(coin.amount) - JSON.parse(amount);
+                money = parseInt(money) + parseInt(price);
+
+                trade.tradeLogSell.unshift({
+                    price: coin.price.toFixed(5),
+                    symbol: coin.symbol,
+                    totalPrice: price,
+                    amount: amount,
+                    date: date,
+                });
+
+                let tr = document.createElement('tr');
+                tr.classList.add('coin');
+
+                tr.innerHTML = `
+                    <td class="log-thead-td log-date">${date}</td>
+                    <td class="log-thead-td log-symbol">${coin.symbol}</td>
+                    <td class="log-thead-td log-price">${coin.price.toFixed(5)}</td>
+                    <td class="log-thead-td log-amount">${amount}</td>
+                    <td class="log-thead-td log-total-price">${price} USDT</td>
+                `;
+
+                logTableSell.prepend(tr);
+
+                localStorage.setItem('dogeTradeLogSell', JSON.stringify(trade.tradeLogSell));
+
+                currentDogeDOM.textContent = `${coin.amount.toFixed(2)} Doge`;
+                moneyDOM.textContent = `${money.toFixed(2)} USDT`
+            } else {
+                alert('Not enough Doge');
+            }
+        }
+    });
+
+    sellAmountInput.value = 0; 
+    sellTotalPriceInput.value = ""; 
 
     localStorage.setItem('cryptoMoney', money);
     localStorage.setItem('coins', JSON.stringify(trade.coins));
 }
 
 buyForm.addEventListener('submit', buy);
+sellForm.addEventListener('submit', sell);
+
+const buyCategoryBtn = document.querySelector('.buy-category-btn'); 
+const sellCategoryBtn = document.querySelector('.sell-category-btn'); 
+
+const buyDOM = document.querySelector('.buy');
+const sellDOM = document.querySelector('.sell');
+
+showSell = (e) => {
+    buyDOM.style.display = "none";
+    buyCategoryBtn.classList.remove('buy-active');
+    logTableBuy.parentNode.style.display = "none";
+
+    sellDOM.style.display = "flex";
+    sellCategoryBtn.classList.add('sell-active');
+    logTableSell.parentNode.style.display = "table";
+}
+
+showBuy = (e) => {
+    buyDOM.style.display = "flex";
+    buyCategoryBtn.classList.add('buy-active');
+    logTableBuy.parentNode.style.display = "table";
+
+    sellDOM.style.display = "none";
+    sellCategoryBtn.classList.remove('sell-active');
+    logTableSell.parentElement.style.display = "none";
+}
+
+sellCategoryBtn.addEventListener('click', showSell);
+buyCategoryBtn.addEventListener('click', showBuy)
+
+localStorage.setItem('cryptoMoney', 100000);

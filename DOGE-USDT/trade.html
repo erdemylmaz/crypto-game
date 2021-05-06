@@ -38,26 +38,43 @@
 
                 <div class="buy">
                     <form class="trade-form-buy">
-                        <input type="number" class="amount-input-buy" placeholder="Amount">
-                        <p></p>
+                        <input type="text" class="amount-input-buy" placeholder="Amount">
+                        <div class="bar">
+                            <div class="p buy-p" value="0">0%</div>
+                            <div class="p buy-p" value="25">25%</div>
+                            <div class="p buy-p" value="50">50%</div>
+                            <div class="p buy-p" value="75">75%</div>
+                            <div class="p buy-p" value="100">100%</div>
+                        </div>
                         <input type="text" class="total-price-input-buy" placeholder="USDT">
                         <p class="current-money">USDT: 100</p>
-                        <input type="submit" value="Buy!">
+                        <input type="submit" class="buy-submit" value="Buy!">
                     </form>
                 </div>
 
                 <div class="sell">
                     <form class="trade-form-sell">
-                        <input type="number" class="amount-input-sell">
-                        <p></p>
-                        <input type="submit" value="Sell!">
+
+                        <input type="text" class="amount-input-sell" placeholder="Amount">
+                        
+                        <div class="bar">
+                            <div class="p sell-p" value="0">0%</div>
+                            <div class="p sell-p" value="25">25%</div>
+                            <div class="p sell-p" value="50">50%</div>
+                            <div class="p sell-p" value="75">75%</div>
+                            <div class="p sell-p" value="100">100%</div>
+                        </div>
+
+                        <input type="text" class="total-price-input-sell" placeholder="USDT">
+                        <p class="current-doge">1000 Doge</p>
+                        <input type="submit" class="sell-submit" value="Sell!">
                     </form>
                 </div>
             </div>
         </div>
 
         <div class="trade-log">
-            <table class="log-table">
+            <table class="log-table buy-log-table">
                 <thead class="log-header">
                     <tr>
                         <td class="log-thead-td log-date">Date</td>
@@ -68,22 +85,22 @@
                     </tr>
                 </thead>
 
-                <tbody>
-                    <tr class="log-coin">
-                        <td class="log-td coin-log-date">12.05.2021 06:12</td>
-                        <td class="log-td coin-log-symbol">DOGE-USDT</td>
-                        <td class="log-td coin-log-price">0.62</td>
-                        <td class="log-td coin-log-amount">1500</td>
-                        <td class="log-td coin-log-total-price">930 USDT</td>
-                    </tr>
+                <tbody class="buy-log-tbody">
+                </tbody>
+            </table>
 
-                    <tr class="log-coin">
-                        <td class="log-td coin-log-date">12.05.2021 12:30</td>
-                        <td class="log-td coin-log-symbol">DOGE-USDT</td>
-                        <td class="log-td coin-log-price">0.70</td>
-                        <td class="log-td coin-log-amount">500</td>
-                        <td class="log-td coin-log-total-price">350 USDT</td>
+            <table class="log-table sell-log-table">
+                <thead class="log-header">
+                    <tr>
+                        <td class="log-thead-td log-date">Date</td>
+                        <td class="log-thead-td log-symbol">Symbol</td>
+                        <td class="log-thead-td log-price">Price</td>
+                        <td class="log-thead-td log-amount">Amount</td>
+                        <td class="log-thead-td log-total-price">Total Price</td>
                     </tr>
+                </thead>
+
+                <tbody class="sell-log-tbody">
                 </tbody>
             </table>
         </div>
