@@ -3,7 +3,6 @@ class Coins {
         {
             name: 'Shiba-Inu',
             symbol: 'SHIB-USDT',
-            imageLink: '',
             price: 0.000001652,
             amount: 100000000,
             isOnFavorites: false,
@@ -13,7 +12,6 @@ class Coins {
         {
             name: 'Doge-Coin',
             symbol: 'DOGE-USDT',
-            imageLink: '',
             price: 0.62346,
             amount: 1500,
             isOnFavorites: false,
@@ -23,7 +21,6 @@ class Coins {
         {
             name: 'Bitcoin',
             symbol: 'BTC-USDT',
-            imageLink: '',
             price: 58756,
             amount: 0,
             isOnFavorites: false,
@@ -33,7 +30,6 @@ class Coins {
         {
             name: 'Ripple',
             symbol: 'XRP-USDT',
-            imageLink: '',
             price: 1.44,
             amount: 0,
             isOnFavorites: false,
@@ -43,7 +39,6 @@ class Coins {
         {
             name: 'Tron',
             symbol: 'TRX-USDT',
-            imageLink: '',
             price: 0.1274,
             amount: 0,
             isOnFavorites: false,
@@ -53,7 +48,6 @@ class Coins {
         {
             name: 'Ethereum',
             symbol: 'ETH-USDT',
-            imageLink: '',
             price: 3333,
             amount: 0,
             isOnFavorites: false,
@@ -63,7 +57,6 @@ class Coins {
         {
             name: 'Lite-Coin',
             symbol: 'LTC-USDT',
-            imageLink: '',
             price: 328,
             amount: 0,
             isOnFavorites: false,
@@ -73,7 +66,6 @@ class Coins {
         {
             name: 'Polkadot',
             symbol: 'DOT-USDT',
-            imageLink: '',
             price: 37.20,
             amount: 0,
             isOnFavorites: false,
@@ -83,7 +75,6 @@ class Coins {
         {
             name: 'Fetch-ai',
             symbol: 'FET-USDT',
-            imageLink: '',
             price: 0.57,
             amount: 0,
             isOnFavorites: false,
@@ -114,12 +105,13 @@ coins.coins.map((coin) => {
     let tr = document.createElement('tr');
     tr.classList.add('coin');
     tr.classList.add(`${coin.category}`);
+    coin.lastPrice = coin.price;
 
     coin.isIncreasing ? tr.classList.add('increasing') : tr.classList.add('decreasing');
 
     tr.innerHTML = `
         <td class="symbol-td coin-td">${coin.symbol}</td>
-        <td class="name-td coin-td">${coin.name}</td>
+        <td class="name-td coin-td"><img src="./images/${coin.name}.png" class="coin-img"> ${coin.name}</td>
         <td class="price-td coin-td ${coin.name}-price">$ ${coin.price.toFixed(9)}</td>
         <td class="buy-coin-td coin-td"><a href="./${coin.symbol}/trade.html" class="buy-coin-btn">Buy / Sell</a></td>
         <td class="add-to-fav-td coin-td"><div class="add-to-fav-btn"><i class="${coin.isOnFavorites ? "fas fa-heart active" : "far fa-heart"} add-to-fav"></i></div></td>
@@ -146,7 +138,13 @@ setInterval(() => {
 
         if(coin.name == 'Bitcoin') {
             coin.price += Math.floor((Math.random() * ((coin.price * 0.5) / 100)) - (Math.random() * ((coin.price * 0.5) / 100)));
-            btcPriceDOM.textContent = `$ ${coin.price}`;
+            let differenceNumber = (coin.price - coin.lastPrice);
+            let differencePercentage = ((differenceNumber / coin.price) * 100).toFixed(2);
+
+            btcPriceDOM.innerHTML = `<div style="width: 128px; display: inline-flex;">$ ${coin.price}</div> <div style="margin-left: 8px;" class="${coin.symbol}-difference">${differencePercentage}%</div>`;
+            let DOM = document.querySelector(`.${coin.symbol}-difference`);
+            DOM.style.width = "64px";
+            DOM.style.textAlign = "center";
 
             if(coin.price > coinsLastPrice) {
                 btcPriceDOM.classList.remove('decreasing');
@@ -156,12 +154,27 @@ setInterval(() => {
                 btcPriceDOM.classList.add('decreasing');
             }
 
+            if(differencePercentage > 0) {
+                DOM.classList.remove('change-decreasing');
+                DOM.classList.add('change-increasing');
+            } else {
+                DOM.classList.remove('change-increasing');
+                DOM.classList.add('change-decreasing');
+
+            }
+
             btcPriceDOM.parentNode.classList.remove('decreasing');
             btcPriceDOM.parentNode.classList.remove('increasing');
 
         } else if (coin.name == "Doge-Coin") {
             coin.price += (Math.random() * ((coin.price * 0.5) / 100)) - (Math.random() * ((coin.price * 0.49) / 100));
-            dogePriceDOM.textContent = `$ ${coin.price.toFixed(5)}`;
+            let differenceNumber = (coin.price - coin.lastPrice);
+            let differencePercentage = ((differenceNumber / coin.price) * 100).toFixed(2);
+
+            dogePriceDOM.innerHTML = `<div style="width: 128px; display: inline-flex;">$ ${coin.price.toFixed(5)}</div> <div style="margin-left: 8px;" class="${coin.symbol}-difference">${differencePercentage}%</div>`;
+            let DOM = document.querySelector(`.${coin.symbol}-difference`);
+            DOM.style.width = "64px";
+            DOM.style.textAlign = "center";
 
             if(coin.price > coinsLastPrice) {
                 dogePriceDOM.classList.remove('decreasing');
@@ -172,12 +185,27 @@ setInterval(() => {
             
             }
 
+            if(differencePercentage > 0) {
+                DOM.classList.remove('change-decreasing');
+                DOM.classList.add('change-increasing');
+            } else {
+                DOM.classList.remove('change-increasing');
+                DOM.classList.add('change-decreasing');
+
+            }
+
             dogePriceDOM.parentNode.classList.remove('decreasing');
             dogePriceDOM.parentNode.classList.remove('increasing');
 
         } else if (coin.name == "Shiba-Inu") {
             coin.price += (Math.random() * ((coin.price * 0.5) / 100)) - (Math.random() * ((coin.price * 0.49) / 100));
-            shibPriceDOM.textContent = `$ ${coin.price.toFixed(9)}`;
+            let differenceNumber = (coin.price - coin.lastPrice);
+            let differencePercentage = ((differenceNumber / coin.price) * 100).toFixed(2);
+
+            shibPriceDOM.innerHTML = `<div style="width: 128px; display: inline-flex;">$ ${coin.price.toFixed(9)}</div> <div style="margin-left: 8px;" class="${coin.symbol}-difference">${differencePercentage}%</div>`;
+            let DOM = document.querySelector(`.${coin.symbol}-difference`);
+            DOM.style.width = "64px";
+            DOM.style.textAlign = "center";
 
             if(coin.price > coinsLastPrice) {
                 shibPriceDOM.classList.remove('decreasing');
@@ -187,12 +215,27 @@ setInterval(() => {
                 shibPriceDOM.classList.add('decreasing');
             }
 
+            if(differencePercentage > 0) {
+                DOM.classList.remove('change-decreasing');
+                DOM.classList.add('change-increasing');
+            } else {
+                DOM.classList.remove('change-increasing');
+                DOM.classList.add('change-decreasing');
+
+            }
+
             shibPriceDOM.parentNode.classList.remove('decreasing');
             shibPriceDOM.parentNode.classList.remove('increasing');
 
         } else if (coin.name == "Ripple") {
             coin.price += (Math.random() * ((coin.price * 0.5) / 100)) - (Math.random() * ((coin.price * 0.49) / 100));
-            ripplePriceDOM.textContent = `$ ${coin.price.toFixed(3)}`;
+            let differenceNumber = (coin.price - coin.lastPrice);
+            let differencePercentage = ((differenceNumber / coin.price) * 100).toFixed(2);
+
+            ripplePriceDOM.innerHTML = `<div style="width: 128px; display: inline-flex;">$ ${coin.price.toFixed(2)}</div> <div style="margin-left: 8px;" class="${coin.symbol}-difference">${differencePercentage}%</div>`;
+            let DOM = document.querySelector(`.${coin.symbol}-difference`);
+            DOM.style.width = "64px";
+            DOM.style.textAlign = "center";
 
             if(coin.price > coinsLastPrice) {
                 ripplePriceDOM.classList.remove('decreasing');
@@ -202,12 +245,27 @@ setInterval(() => {
                 ripplePriceDOM.classList.add('decreasing');
             }
 
+            if(differencePercentage > 0) {
+                DOM.classList.remove('change-decreasing');
+                DOM.classList.add('change-increasing');
+            } else {
+                DOM.classList.remove('change-increasing');
+                DOM.classList.add('change-decreasing');
+
+            }
+
             ripplePriceDOM.parentNode.classList.remove('decreasing');
             ripplePriceDOM.parentNode.classList.remove('increasing');
 
         } else if (coin.name == "Tron") {
             coin.price += (Math.random() * ((coin.price * 0.5) / 100)) - (Math.random() * ((coin.price * 0.49) / 100));
-            tronPriceDOM.textContent = `$ ${coin.price.toFixed(4)}`;
+            let differenceNumber = (coin.price - coin.lastPrice);
+            let differencePercentage = ((differenceNumber / coin.price) * 100).toFixed(2);
+
+            tronPriceDOM.innerHTML = `<div style="width: 128px; display: inline-flex;">$ ${coin.price.toFixed(2)}</div> <div style="margin-left: 8px;" class="${coin.symbol}-difference">${differencePercentage}%</div>`;
+            let DOM = document.querySelector(`.${coin.symbol}-difference`);
+            DOM.style.width = "64px";
+            DOM.style.textAlign = "center";
 
             if(coin.price > coinsLastPrice) {
                 tronPriceDOM.classList.remove('decreasing');
@@ -217,12 +275,27 @@ setInterval(() => {
                 tronPriceDOM.classList.add('decreasing');
             }
 
+            if(differencePercentage > 0) {
+                DOM.classList.remove('change-decreasing');
+                DOM.classList.add('change-increasing');
+            } else {
+                DOM.classList.remove('change-increasing');
+                DOM.classList.add('change-decreasing');
+
+            }
+
             tronPriceDOM.parentNode.classList.remove('decreasing');
             tronPriceDOM.parentNode.classList.remove('increasing');
 
         } else if (coin.name == "Ethereum") {
             coin.price += Math.floor((Math.random() * ((coin.price * 0.5) / 100)) - (Math.random() * ((coin.price * 0.49) / 100)));
-            ethereumPriceDOM.textContent = `$ ${coin.price}`;
+            let differenceNumber = (coin.price - coin.lastPrice);
+            let differencePercentage = ((differenceNumber / coin.price) * 100).toFixed(2);
+
+            ethereumPriceDOM.innerHTML = `<div style="width: 128px; display: inline-flex;">$ ${coin.price.toFixed()}</div> <div style="margin-left: 8px;" class="${coin.symbol}-difference">${differencePercentage}%</div>`;
+            let DOM = document.querySelector(`.${coin.symbol}-difference`);
+            DOM.style.width = "64px";
+            DOM.style.textAlign = "center";
 
             if(coin.price > coinsLastPrice) {
                 ethereumPriceDOM.classList.remove('decreasing');
@@ -232,12 +305,27 @@ setInterval(() => {
                 ethereumPriceDOM.classList.add('decreasing');
             }
 
+            if(differencePercentage > 0) {
+                DOM.classList.remove('change-decreasing');
+                DOM.classList.add('change-increasing');
+            } else {
+                DOM.classList.remove('change-increasing');
+                DOM.classList.add('change-decreasing');
+
+            }
+
             ethereumPriceDOM.parentNode.classList.remove('decreasing');
             ethereumPriceDOM.parentNode.classList.remove('increasing');
 
         } else if (coin.name == "Lite-Coin") {
             coin.price += (Math.random() * ((coin.price * 0.5) / 100)) - (Math.random() * ((coin.price * 0.49) / 100));
-            litePriceDOM.textContent = `$ ${coin.price.toFixed(2)}`;
+            let differenceNumber = (coin.price - coin.lastPrice);
+            let differencePercentage = ((differenceNumber / coin.price) * 100).toFixed(2);
+
+            litePriceDOM.innerHTML = `<div style="width: 128px; display: inline-flex;">$ ${coin.price.toFixed(2)}</div> <div style="margin-left: 8px;" class="${coin.symbol}-difference">${differencePercentage}%</div>`;
+            let DOM = document.querySelector(`.${coin.symbol}-difference`);
+            DOM.style.width = "64px";
+            DOM.style.textAlign = "center";
 
             if(coin.price > coinsLastPrice) {
                 litePriceDOM.classList.remove('decreasing');
@@ -247,12 +335,27 @@ setInterval(() => {
                 litePriceDOM.classList.add('decreasing');
             }
 
+            if(differencePercentage > 0) {
+                DOM.classList.remove('change-decreasing');
+                DOM.classList.add('change-increasing');
+            } else {
+                DOM.classList.remove('change-increasing');
+                DOM.classList.add('change-decreasing');
+
+            }
+
             litePriceDOM.parentNode.classList.remove('decreasing');
             litePriceDOM.parentNode.classList.remove('increasing');
 
         } else if (coin.name == "Polkadot") {
             coin.price += (Math.random() * ((coin.price * 0.5) / 100)) - (Math.random() * ((coin.price * 0.49) / 100));
-            dotPriceDOM.textContent = `$ ${coin.price.toFixed(2)}`;
+            let differenceNumber = (coin.price - coin.lastPrice);
+            let differencePercentage = ((differenceNumber / coin.price) * 100).toFixed(2);
+
+            dotPriceDOM.innerHTML = `<div style="width: 128px; display: inline-flex;">$ ${coin.price.toFixed(2)}</div> <div style="margin-left: 8px;" class="${coin.symbol}-difference">${differencePercentage}%</div>`;
+            let DOM = document.querySelector(`.${coin.symbol}-difference`);
+            DOM.style.width = "64px";
+            DOM.style.textAlign = "center";
 
             if(coin.price > coinsLastPrice) {
                 dotPriceDOM.classList.remove('decreasing');
@@ -262,12 +365,27 @@ setInterval(() => {
                 dotPriceDOM.classList.add('decreasing');
             }
 
+            if(differencePercentage > 0) {
+                DOM.classList.remove('change-decreasing');
+                DOM.classList.add('change-increasing');
+            } else {
+                DOM.classList.remove('change-increasing');
+                DOM.classList.add('change-decreasing');
+
+            }
+
             dotPriceDOM.parentNode.classList.remove('decreasing');
             dotPriceDOM.parentNode.classList.remove('increasing');
 
         } else if (coin.name == "Fetch-ai") {
             coin.price += (Math.random() * ((coin.price * 0.5) / 100)) - (Math.random() * ((coin.price * 0.49) / 100));
-            fetchPriceDOM.textContent = `$ ${coin.price.toFixed(3)}`;
+            let differenceNumber = (coin.price - coin.lastPrice);
+            let differencePercentage = ((differenceNumber / coin.price) * 100).toFixed(2);
+
+            fetchPriceDOM.innerHTML = `<div style="width: 128px; display: inline-flex;">$ ${coin.price.toFixed(4)}</div> <div style="margin-left: 8px;" class="${coin.symbol}-difference">${differencePercentage}%</div>`;
+            let DOM = document.querySelector(`.${coin.symbol}-difference`);
+            DOM.style.width = "64px";
+            DOM.style.textAlign = "center";
 
             if(coin.price > coinsLastPrice) {
                 fetchPriceDOM.classList.remove('decreasing');
@@ -275,6 +393,15 @@ setInterval(() => {
             } else {
                 fetchPriceDOM.classList.remove('increasing');
                 fetchPriceDOM.classList.add('decreasing');
+            }
+
+            if(differencePercentage > 0) {
+                DOM.classList.remove('change-decreasing');
+                DOM.classList.add('change-increasing');
+            } else {
+                DOM.classList.remove('change-increasing');
+                DOM.classList.add('change-decreasing');
+
             }
 
             fetchPriceDOM.parentNode.classList.remove('decreasing');
@@ -296,13 +423,13 @@ showNavbar = () => {
     if(navbar.classList.contains('show')) {
         navbar.classList.remove('show');
         body.style.marginLeft = "0%";
-        body.style.transition = "750ms";
-        navbar.style.transition = "750ms";
+        body.style.transition = "1s";
+        navbar.style.transition = "1s";
     } else {
         navbar.classList.add('show');
         body.style.marginLeft = "-10%";
-        body.style.transition = "750ms";
-        navbar.style.transition = "750ms";
+        body.style.transition = "1s";
+        navbar.style.transition = "1s";
     }
 }
 

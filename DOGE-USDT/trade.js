@@ -7,13 +7,13 @@ showNavbar = () => {
     if(navbar.classList.contains('show')) {
         navbar.classList.remove('show');
         body.style.marginLeft = "0%";
-        body.style.transition = "750ms";
-        navbar.style.transition = "750ms";
+        body.style.transition = "1s";
+        navbar.style.transition = "1s";
     } else {
         navbar.classList.add('show');
         body.style.marginLeft = "-10%";
-        body.style.transition = "750ms";
-        navbar.style.transition = "750ms";
+        body.style.transition = "1s";
+        navbar.style.transition = "1s";
     }
 }
 
@@ -121,7 +121,7 @@ buyTotalPriceInput.addEventListener('keyup', updateAmount);
 
 let money = parseInt(localStorage.getItem('cryptoMoney'));
 
-moneyDOM.textContent = `$ ${money}`;
+moneyDOM.textContent = `${money} USDT`;
 
 buy = (e) => {
     e.preventDefault();
@@ -141,8 +141,7 @@ buy = (e) => {
         alert('Not enough money');
     }
 
-
-    moneyDOM.textContent = `$ ${money.toFixed(2)}`;
+    moneyDOM.textContent = `${money.toFixed(2)} USDT`;
 
     console.log(trade.coins[1].amount);
 

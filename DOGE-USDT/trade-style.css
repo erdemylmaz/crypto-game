@@ -1,6 +1,16 @@
+:root {
+    --blue: #5271ff;
+    --darkBlue: #5271ff88;
+    --mainBackground: rgb(241, 243, 245);
+    --background: rgb(246, 249, 252);
+    --background2: #FAFBFC;
+    --hoverBlue: rgb(10, 70, 228);
+    --brightBlue: rgb(22, 82, 240);
+}
+
 .trade-area {
     width: 100%;
-    min-height: 90vh;
+    padding-bottom: 48px;
 
     display: inline-flex;
     justify-content: space-between;
@@ -15,10 +25,10 @@
 .coin-name {
     font-size: 36px;
     margin-left: 24px;
-}
-
-.bright .coin-price {
-    color: black;
+    height: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .coin-price {
@@ -58,6 +68,18 @@
     background-color: #00C206;
 }
 
+.bright .sell-category-btn {
+    background-color: #00B30077;
+}
+
+.bright .sell-category-btn:hover {
+    background-color: #00B300;
+}
+
+.bright .buy-active {
+    background-color: #00B300;
+}
+
 .sell-category-btn {
     transition: 500ms;
     margin-left: 8px;
@@ -67,6 +89,22 @@
 .sell-category-btn:hover {
     background-color: #E01200;
     cursor: pointer;
+}
+
+.sell-active {
+    background-color: #E01200;
+}
+
+.bright .sell-category-btn {
+    background-color: #F2051977;
+}
+
+.bright .sell-category-btn:hover {
+    background-color: #F20519;
+}
+
+.bright .sell-active {
+    background-color: #F20519;
 }
 
 input {
@@ -83,6 +121,10 @@ input[type="number"], input[type="text"] {
     color: white;
 }
 
+.bright input[type="number"], .bright input[type="text"] {
+    color: black;
+}
+
 input[type="submit"] {
     width: 264px;
 
@@ -92,6 +134,17 @@ input[type="submit"] {
 
     transition: 500ms;
     border-radius: 8px;
+}
+
+.bright input[type="submit"] {
+    color: black;
+    border: 1px solid #00B300;
+}
+
+.bright input[type="submit"]:hover {
+    border: 1px solid white;
+    background-color: #00B300;
+    color: white;
 }
 
 input[type="submit"]:hover {
@@ -104,4 +157,34 @@ input[type="submit"]:hover {
     font-size: 16px;
     color: #4a4a4a;
     text-align: right;
+    margin-right: 8px;
+}
+
+.log-table {
+    width: 80%;
+    margin-top: 48px;
+    padding-left: 24px;
+    padding-right: 24px;
+    border-radius: 8px;
+}
+
+.bright .log-table {
+    background-color: var(--background);
+}
+
+.bright .log-td {
+    color: black;
+}
+
+tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.bright tbody tr:hover {
+    background-color: var(--background2);
+}
+
+.coin-img {
+    width: 48px;
+    height: 48px;
 }
