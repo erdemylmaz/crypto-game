@@ -134,3 +134,19 @@ tfoot tr td {
     cursor: pointer;
     background-color: var(--blue);
 }
+
+tbody .money td {
+    color: #4a4a4a;
+}
+
+.bright tbody .money td {
+    color: black;
+}
+
+.coin-img {
+    margin-left: 0;
+}
+
+.buy-btn {
+    text-decoration: none;
+}

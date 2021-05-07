@@ -79,12 +79,12 @@ if(localStorage.getItem('coins')) {
     trade.coins = JSON.parse(localStorage.getItem('coins'));
 }
 
-if(localStorage.getItem('dogeTradeLogBuy')) {
-    trade.tradeLogBuy = JSON.parse(localStorage.getItem('dogeTradeLogBuy'));
+if(localStorage.getItem('btcTradeLogBuy')) {
+    trade.tradeLogBuy = JSON.parse(localStorage.getItem('btcTradeLogBuy'));
 }
 
-if(localStorage.getItem('dogeTradeLogSell')) {
-    trade.tradeLogSell = JSON.parse(localStorage.getItem('dogeTradeLogSell'));
+if(localStorage.getItem('btcTradeLogSell')) {
+    trade.tradeLogSell = JSON.parse(localStorage.getItem('btcTradeLogSell'));
 }
 
 trade.tradeLogBuy.map((log) => {
@@ -117,28 +117,28 @@ trade.tradeLogSell.map((log) => {
     logTableSell.prepend(tr);
 })
 
-const dogePriceDOM = document.querySelector('.coin-price');
+const btcPriceDOM = document.querySelector('.coin-price');
 
 setInterval(() => {
     trade.coins.map((coin) => {
         let coinsLastPrice = coin.price
 
-        if(coin.symbol == "DOGE-USDT") {
+        if(coin.symbol == "BTC-USDT") {
             coin.price += (Math.random() * ((coin.price * 0.5) / 100)) - (Math.random() * ((coin.price * 0.49) / 100));
-            dogePriceDOM.textContent = `$ ${coin.price.toFixed(5)}`;
+            btcPriceDOM.textContent = `$ ${coin.price.toFixed(2)}`;
 
             if(coin.price > coinsLastPrice) {
-                dogePriceDOM.classList.remove('decreasing');
-                dogePriceDOM.classList.add('increasing');
+                btcPriceDOM.classList.remove('decreasing');
+                btcPriceDOM.classList.add('increasing');
             } else {
-                dogePriceDOM.classList.remove('increasing');
-                dogePriceDOM.classList.add('decreasing');
+                btcPriceDOM.classList.remove('increasing');
+                btcPriceDOM.classList.add('decreasing');
             }
 
         }
     })
-
     localStorage.setItem('coins', JSON.stringify(trade.coins));
+
 }, 1000)
 
 const buyAmountInput = document.querySelector('.amount-input-buy');
@@ -166,10 +166,10 @@ buyPercentages.forEach((p) => {
 
     p.addEventListener('click', () => {
         trade.coins.map((coin) => {
-            if(coin.symbol == "DOGE-USDT") {
+            if(coin.symbol == "BTC-USDT") {
                 let money = JSON.parse(localStorage.getItem('cryptoMoney'));
 
-                buyAmountInput.value = (((money / coin.price) * percentage) / 100).toFixed(2);
+                buyAmountInput.value = (((money / coin.price) * percentage) / 100).toFixed(6);
                 buyTotalPriceInput.value = ((money * percentage) / 100).toFixed(2);
             }
         })
@@ -192,10 +192,10 @@ sellPercentages.forEach((p) => {
 
     p.addEventListener('click', () => {
         trade.coins.map((coin) => {
-            if(coin.symbol == "DOGE-USDT") {
+            if(coin.symbol == "BTC-USDT") {
                 let money = JSON.parse(localStorage.getItem('cryptoMoney'));
 
-                sellAmountInput.value = ((coin.amount * percentage) / 100).toFixed(2);
+                sellAmountInput.value = ((coin.amount * percentage) / 100).toFixed(6);
                 sellTotalPriceInput.value = (sellAmountInput.value * coin.price).toFixed(2);
             }
         })
@@ -208,7 +208,7 @@ const moneyDOM = document.querySelector('.current-money');
 
 updateTotalPrice = (e) => {
     trade.coins.map((coin) => {
-        if(coin.symbol == "DOGE-USDT") {
+        if(coin.symbol == "BTC-USDT") {
             buyTotalPriceInput.value = (e.target.value * coin.price).toFixed(2);
         }
     })
@@ -217,7 +217,7 @@ updateTotalPrice = (e) => {
 }
 updateTotalPriceSell = (e) => {
     trade.coins.map((coin) => {
-        if(coin.symbol == "DOGE-USDT") {
+        if(coin.symbol == "BTC-USDT") {
             sellTotalPriceInput.value = (e.target.value * coin.price).toFixed(2);
         }
     })
@@ -228,16 +228,16 @@ sellAmountInput.addEventListener('keyup', updateTotalPriceSell);
 
 updateAmount = (e) => {
     trade.coins.map((coin) => {
-        if(coin.symbol == "DOGE-USDT") {
-            buyAmountInput.value = (e.target.value / coin.price).toFixed(2);
+        if(coin.symbol == "BTC-USDT") {
+            buyAmountInput.value = (e.target.value / coin.price).toFixed(6);
         }
     })
 }
 
 updateAmountSell = (e) => {
     trade.coins.map((coin) => {
-        if(coin.symbol == "DOGE-USDT") {
-            sellAmountInput.value = (e.target.value / coin.price).toFixed(2);
+        if(coin.symbol == "BTC-USDT") {
+            sellAmountInput.value = (e.target.value / coin.price).toFixed(6);
         }
     })
 }
@@ -248,12 +248,12 @@ sellTotalPriceInput.addEventListener('keyup', updateAmountSell);
 let money = parseInt(localStorage.getItem('cryptoMoney'));
 moneyDOM.textContent = `${money.toFixed(2)} USDT`;
 
-const currentDogeDOM = document.querySelector('.current-doge');
+const currentBtcDOM = document.querySelector('.current-coin');
 
 trade.coins.map((coin) => {
-    if(coin.symbol == "DOGE-USDT") {
-        currentDogeDOM.innerHTML = `${coin.amount.toFixed(2)} Doge`;
-        dogePriceDOM.innerHTML = `$ ${coin.price.toFixed(5)}`;
+    if(coin.symbol == "BTC-USDT") {
+        currentBtcDOM.innerHTML = `${coin.amount.toFixed(6)} Btc`;
+        btcPriceDOM.innerHTML = `$ ${coin.price.toFixed(2)}`;
     }
 })
 
@@ -270,10 +270,10 @@ buy = (e) => {
     let coinPrice = "";
 
     trade.coins.map((coin) => {
-        if(coin.symbol == "DOGE-USDT") {
+        if(coin.symbol == "BTC-USDT") {
             coinPrice = coin.price;
 
-            amount = (price / coinPrice).toFixed(2);
+            amount = (price / coinPrice).toFixed(6);
         }
     });
 
@@ -292,12 +292,12 @@ buy = (e) => {
         money -= price;
     
         trade.coins.map((coin) => {
-            if (coin.symbol == "DOGE-USDT") {
+            if (coin.symbol == "BTC-USDT") {
                 coin.amount = JSON.parse(coin.amount) + JSON.parse(amount);
                 coin.isUserHave = true;
 
             trade.tradeLogBuy.unshift({
-                price: coin.price.toFixed(5),
+                price: coin.price.toFixed(2),
                 symbol: coin.symbol,
                 totalPrice: price,
                 amount: amount,
@@ -310,16 +310,16 @@ buy = (e) => {
             tr.innerHTML = `
                 <td class="log-thead-td log-date">${date}</td>
                 <td class="log-thead-td log-symbol">${coin.symbol}</td>
-                <td class="log-thead-td log-price">${coin.price.toFixed(5)}</td>
+                <td class="log-thead-td log-price">${coin.price.toFixed(2)}</td>
                 <td class="log-thead-td log-amount">${amount}</td>
                 <td class="log-thead-td log-total-price">${price} USDT</td>
             `;
 
-            currentDogeDOM.innerHTML = `${coin.amount.toFixed(2)} Doge`;
+            currentBtcDOM.innerHTML = `${coin.amount.toFixed(6)} Btc`;
 
             logTableBuy.prepend(tr);
 
-            localStorage.setItem('dogeTradeLogBuy', JSON.stringify(trade.tradeLogBuy));
+            localStorage.setItem('btcTradeLogBuy', JSON.stringify(trade.tradeLogBuy));
         }
         });
     } else {
@@ -344,10 +344,10 @@ sell = (e) => {
     let coinPrice = "";
 
     trade.coins.map((coin) => {
-        if(coin.symbol == "DOGE-USDT") {
+        if(coin.symbol == "BTC-USDT") {
             coinPrice = coin.price;
 
-            price = (amount * coinPrice).toFixed(5);
+            price = (amount * coinPrice).toFixed(2);
         }
     });
 
@@ -363,17 +363,17 @@ sell = (e) => {
     let date = `${day}.${month}.${year} ${h}:${m}`;
 
     trade.coins.map((coin) => {
-        if (coin.symbol == "DOGE-USDT") {
+        if (coin.symbol == "BTC-USDT") {
             if(parseInt(amount) <= coin.amount) {
                 coin.amount = JSON.parse(coin.amount) - JSON.parse(amount);
                 money = parseInt(money) + parseInt(price);
 
-                if(coin.amount < 1) {
+                if(coin.amount <= 0) {
                     coin.isUserHave = false;
                 }
 
                 trade.tradeLogSell.unshift({
-                    price: coin.price.toFixed(5),
+                    price: coin.price.toFixed(2),
                     symbol: coin.symbol,
                     totalPrice: price,
                     amount: amount,
@@ -386,19 +386,19 @@ sell = (e) => {
                 tr.innerHTML = `
                     <td class="log-thead-td log-date">${date}</td>
                     <td class="log-thead-td log-symbol">${coin.symbol}</td>
-                    <td class="log-thead-td log-price">${coin.price.toFixed(5)}</td>
+                    <td class="log-thead-td log-price">${coin.price.toFixed(2)}</td>
                     <td class="log-thead-td log-amount">${amount}</td>
                     <td class="log-thead-td log-total-price">${price} USDT</td>
                 `;
 
                 logTableSell.prepend(tr);
 
-                localStorage.setItem('dogeTradeLogSell', JSON.stringify(trade.tradeLogSell));
+                localStorage.setItem('btcTradeLogSell', JSON.stringify(trade.tradeLogSell));
 
-                currentDogeDOM.textContent = `${coin.amount.toFixed(2)} Doge`;
+                currentBtcDOM.textContent = `${coin.amount.toFixed(6)} BTC`;
                 moneyDOM.textContent = `${money.toFixed(2)} USDT`
             } else {
-                alert('Not enough Doge');
+                alert('Not enough Bitcoin');
             }
         }
     });

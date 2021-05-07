@@ -65,7 +65,7 @@ if(localStorage.getItem('cryptoTheme')) {
 class Portfolio {
     currentCoins = [];
 
-    totalMoney = 0;
+    totalMoney = parseInt(localStorage.getItem('cryptoMoney'));
 }
 
 const portfolio = new Portfolio();
@@ -85,11 +85,22 @@ portfolio.currentCoins.map((coin) => {
 
         tr.innerHTML = `
             <td class="coin-symbol">${coin.symbol}</td>
-            <td class="coin-name">${coin.name}</td>
-            <td class="coin-amount">${coin.amount}</td>
+            <td class="name-td coin-td"><img src="../images/${coin.name}.png" class="coin-img">${coin.name}</td>
+            <td class="coin-amount">${coin.amount.toFixed(2)}</td>
             <td class="coin-total-price ${coin.name}-total">$ ${(coinsTotalPrice).toFixed(2)}</td>
-            <td class="coin-buy-sell"><div class="buy-btn">Buy / Sell</div></td>
+            <td class="coin-buy-sell"><a href="../${coin.symbol}/trade.html" class="buy-btn">Buy / Sell</a></td>
         `;
+
+        if(coin.name == "Bitcoin" || coin.name == "Ethereum") {
+            tr.innerHTML = `
+                <td class="coin-symbol">${coin.symbol}</td>
+                <td class="name-td coin-td"><img src="../images/${coin.name}.png" class="coin-img">${coin.name}</td>
+                <td class="coin-amount">${coin.amount.toFixed(6)}</td>
+                <td class="coin-total-price ${coin.name}-total">$ ${(coinsTotalPrice).toFixed(2)}</td>
+                <td class="coin-buy-sell"><a href="../${coin.symbol}/trade.html" class="buy-btn">Buy / Sell</a></td>
+            `;
+
+        }
 
         coinsTable.appendChild(tr);
     }
@@ -98,7 +109,7 @@ portfolio.currentCoins.map((coin) => {
 
 // update price
 setInterval(() => {
-    portfolio.totalMoney = 100;
+    portfolio.totalMoney = parseInt(localStorage.getItem('cryptoMoney'));
 
     portfolio.currentCoins.forEach((coin) => {
         if(coin.name == 'Bitcoin' && coin.isUserHave) {
@@ -182,3 +193,10 @@ setInterval(() => {
 
     });
 }, 1000);
+
+// money DOM
+const moneyDOM = document.querySelector('.current-money');
+const currentTotalMoneyDOM = document.querySelector('.total-current-money');
+
+currentTotalMoneyDOM.innerHTML = `$ ${portfolio.totalMoney.toFixed(2)}`;
+moneyDOM.innerHTML = `${portfolio.totalMoney.toFixed(2)}`;

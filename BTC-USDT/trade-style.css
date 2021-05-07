@@ -238,11 +238,7 @@ tbody tr:hover {
     margin-right: 8px;
 }
 
-.bright .coin-price {
-    color: black;
-}
-
-.current-doge {
+.current-coin {
     color: #4a4a4a;
     margin-right: 8px;
     text-align: right;
@@ -285,4 +281,7 @@ tbody tr:hover {
 
 .bright .p:hover {
     background-color: rgba(0, 0, 0, 0.1);
+}
+.bright .coin-price {
+    color: black;
 }
