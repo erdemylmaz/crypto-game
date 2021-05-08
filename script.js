@@ -1,3 +1,18 @@
+// new
+let isUserNew = true;
+
+if(localStorage.getItem('isUserNew')) {
+    isUserNew = localStorage.getItem('isUserNew');
+}
+
+if(isUserNew == true) {
+    alert("How to Play \n Try to make money from buy or sell crypto coins. \n You start with 1500 USDT \n There may be some bugs, if you see one of them pls let me know! \n \n (THIS ISN'T REAL CRYPTOCURRENCY PLATFORM THIS IS JUST GAME!)");
+    isUserNew = false;
+
+    localStorage.setItem('isUserNew', isUserNew);
+}
+
+// game
 class Coins {
     coins = [
         {
