@@ -99,7 +99,7 @@ trade.tradeLogBuy.map((log) => {
         <td class="log-thead-td log-total-price">${log.totalPrice} USDT</td>
     `;
 
-    logTableBuy.prepend(tr);
+    logTableBuy.appendChild(tr);
 })
 
 trade.tradeLogSell.map((log) => { 
@@ -114,7 +114,7 @@ trade.tradeLogSell.map((log) => {
         <td class="log-thead-td log-total-price">${log.totalPrice} USDT</td>
     `;
 
-    logTableSell.prepend(tr);
+    logTableSell.appendChild(tr);
 })
 
 const dogePriceDOM = document.querySelector('.coin-price');
@@ -139,7 +139,20 @@ setInterval(() => {
     })
 
     localStorage.setItem('coins', JSON.stringify(trade.coins));
-}, 1000)
+}, 1000);
+
+setInterval(() => {
+    trade.coins.map((coin) => {
+        if(coin.symbol == "DOGE-USDT") {
+            buyAmountInput.value = (buyTotalPriceInput.value / coin.price).toFixed(6);
+            sellTotalPriceInput.value = (sellAmountInput.value * coin.price).toFixed(2);
+        }
+    })
+
+    localStorage.setItem('coins', JSON.stringify(trade.coins));
+}, 10000);
+
+
 
 const buyAmountInput = document.querySelector('.amount-input-buy');
 const buyTotalPriceInput = document.querySelector('.total-price-input-buy');
@@ -164,7 +177,15 @@ buyPercentages.forEach((p) => {
         percentage += p.textContent[0];
     }
 
-    p.addEventListener('click', () => {
+    p.addEventListener('click', (e) => {
+        buyPercentages.forEach((percent) => {
+            percent.classList.remove('selectedPercentageBuy');
+        });
+
+        if(p.textContent.indexOf(percentage) != -1) {
+            e.target.classList.contains('selectedPercentageBuy') ? e.target.classList.remove('selectedPercentageBuy') : e.target.classList.add('selectedPercentageBuy'); 
+        }
+
         trade.coins.map((coin) => {
             if(coin.symbol == "DOGE-USDT") {
                 let money = JSON.parse(localStorage.getItem('cryptoMoney'));
@@ -190,11 +211,17 @@ sellPercentages.forEach((p) => {
         percentage += p.textContent[0];
     }
 
-    p.addEventListener('click', () => {
+    p.addEventListener('click', (e) => {
+        sellPercentages.forEach((percent) => {
+            percent.classList.remove('selectedPercentageSell');
+        });
+
+        if(p.textContent.indexOf(percentage) != -1) {
+            e.target.classList.contains('selectedPercentageSell') ? e.target.classList.remove('selectedPercentageSell') : e.target.classList.add('selectedPercentageSell'); 
+        }
+
         trade.coins.map((coin) => {
             if(coin.symbol == "DOGE-USDT") {
-                let money = JSON.parse(localStorage.getItem('cryptoMoney'));
-
                 sellAmountInput.value = ((coin.amount * percentage) / 100).toFixed(2);
                 sellTotalPriceInput.value = (sellAmountInput.value * coin.price).toFixed(2);
             }

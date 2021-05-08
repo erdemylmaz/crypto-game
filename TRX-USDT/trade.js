@@ -99,7 +99,7 @@ trade.tradeLogBuy.map((log) => {
         <td class="log-thead-td log-total-price">${log.totalPrice} USDT</td>
     `;
 
-    logTableBuy.appendChild(tr);
+    logTableBuy.prepend(tr);
 })
 
 trade.tradeLogSell.map((log) => { 
@@ -114,17 +114,10 @@ trade.tradeLogSell.map((log) => {
         <td class="log-thead-td log-total-price">${log.totalPrice} USDT</td>
     `;
 
-    logTableSell.appendChild(tr);
+    logTableSell.prepend(tr);
 })
 
 const btcPriceDOM = document.querySelector('.coin-price');
-
-const buyAmountInput = document.querySelector('.amount-input-buy');
-const buyTotalPriceInput = document.querySelector('.total-price-input-buy');
-
-const sellAmountInput = document.querySelector('.amount-input-sell');
-const sellTotalPriceInput = document.querySelector('.total-price-input-sell');
-
 
 setInterval(() => {
     trade.coins.map((coin) => {
@@ -146,18 +139,13 @@ setInterval(() => {
     })
     localStorage.setItem('coins', JSON.stringify(trade.coins));
 
-}, 1000);
+}, 1000)
 
-setInterval(() => {
-    trade.coins.map((coin) => {
-        if(coin.symbol == "BTC-USDT") {
-            buyAmountInput.value = (buyTotalPriceInput.value / coin.price).toFixed(6);
-            sellTotalPriceInput.value = (sellAmountInput.value * coin.price).toFixed(2);
-        }
-    })
+const buyAmountInput = document.querySelector('.amount-input-buy');
+const buyTotalPriceInput = document.querySelector('.total-price-input-buy');
 
-    localStorage.setItem('coins', JSON.stringify(trade.coins));
-}, 10000);
+const sellAmountInput = document.querySelector('.amount-input-sell');
+const sellTotalPriceInput = document.querySelector('.total-price-input-sell');
 
 const buyPercentages = document.querySelectorAll('.buy-p');
 const sellPercentages = document.querySelectorAll('.sell-p');
@@ -176,15 +164,7 @@ buyPercentages.forEach((p) => {
         percentage += p.textContent[0];
     }
 
-    p.addEventListener('click', (e) => {
-        buyPercentages.forEach((percent) => {
-            percent.classList.remove('selectedPercentageBuy');
-        });
-
-        if(p.textContent.indexOf(percentage) != -1) {
-            e.target.classList.contains('selectedPercentageBuy') ? e.target.classList.remove('selectedPercentageBuy') : e.target.classList.add('selectedPercentageBuy'); 
-        }
-
+    p.addEventListener('click', () => {
         trade.coins.map((coin) => {
             if(coin.symbol == "BTC-USDT") {
                 let money = JSON.parse(localStorage.getItem('cryptoMoney'));
@@ -210,17 +190,11 @@ sellPercentages.forEach((p) => {
         percentage += p.textContent[0];
     }
 
-    p.addEventListener('click', (e) => {
-        sellPercentages.forEach((percent) => {
-            percent.classList.remove('selectedPercentageSell');
-        });
-
-        if(p.textContent.indexOf(percentage) != -1) {
-            e.target.classList.contains('selectedPercentageSell') ? e.target.classList.remove('selectedPercentageSell') : e.target.classList.add('selectedPercentageSell'); 
-        }
-
+    p.addEventListener('click', () => {
         trade.coins.map((coin) => {
             if(coin.symbol == "BTC-USDT") {
+                let money = JSON.parse(localStorage.getItem('cryptoMoney'));
+
                 sellAmountInput.value = ((coin.amount * percentage) / 100).toFixed(6);
                 sellTotalPriceInput.value = (sellAmountInput.value * coin.price).toFixed(2);
             }

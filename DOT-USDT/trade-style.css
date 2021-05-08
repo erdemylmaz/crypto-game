@@ -285,23 +285,3 @@ tbody tr:hover {
 .bright .coin-price {
     color: black;
 }
-
-.selectedPercentageBuy {
-    background-color: #00C206;
-    color: #4a4a4a;
-}
-
-.bright .selectedPercentageBuy {
-    background-color: #00B300;
-    color: white;
-}
-
-.selectedPercentageSell {
-    background-color: #E01200;
-    color: #4a4a4a;
-}
-
-.bright .selectedPercentageSell {
-    background-color: #F20519;
-    color: white;
-}

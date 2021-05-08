@@ -3,20 +3,20 @@ class Coins {
         {
             name: 'Shiba-Inu',
             symbol: 'SHIB-USDT',
-            price: 0.000001652,
-            amount: 100000000,
+            price: 0.000006652,
+            amount: 0,
             isOnFavorites: false,
             category: 'shit',
-            isUserHave: true,
+            isUserHave: false,
         },
         {
             name: 'Doge-Coin',
             symbol: 'DOGE-USDT',
-            price: 0.62346,
-            amount: 1000,
+            price: 0.65346,
+            amount: 0,
             isOnFavorites: false,
             category: 'shit',
-            isUserHave: true,
+            isUserHave: false,
         },
         {
             name: 'Bitcoin',
@@ -83,7 +83,7 @@ class Coins {
         },
     ];
 
-    money = 1000;
+    money = 1500;
 }
 
 const coins = new Coins();
@@ -812,20 +812,20 @@ resetGame = () => {
             {
                 name: 'Shiba-Inu',
                 symbol: 'SHIB-USDT',
-                price: 0.000001652,
-                amount: 100000000,
+                price: 0.000006652,
+                amount: 0,
                 isOnFavorites: false,
                 category: 'shit',
-                isUserHave: true,
+                isUserHave: false,
             },
             {
                 name: 'Doge-Coin',
                 symbol: 'DOGE-USDT',
-                price: 0.62346,
-                amount: 1000,
+                price: 0.65346,
+                amount: 0,
                 isOnFavorites: false,
                 category: 'shit',
-                isUserHave: true,
+                isUserHave: false,
             },
             {
                 name: 'Bitcoin',
@@ -909,13 +909,16 @@ resetGame = () => {
             coinTable.appendChild(tr);
         });
 
-        coins.money = 1000;
+        coins.money = 1500;
 
         localStorage.removeItem('dogeTradeLogBuy');
         localStorage.removeItem('dogeTradeLogSell');
 
         localStorage.removeItem('btcTradeLogBuy');
         localStorage.removeItem('btcTradeLogSell');
+
+        localStorage.removeItem('shibTradeLogBuy');
+        localStorage.removeItem('shibTradeLogSell');
 
         localStorage.removeItem('coins');
         localStorage.setItem('coins', JSON.stringify(coins.coins));

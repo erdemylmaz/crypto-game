@@ -79,12 +79,12 @@ if(localStorage.getItem('coins')) {
     trade.coins = JSON.parse(localStorage.getItem('coins'));
 }
 
-if(localStorage.getItem('btcTradeLogBuy')) {
-    trade.tradeLogBuy = JSON.parse(localStorage.getItem('btcTradeLogBuy'));
+if(localStorage.getItem('shibTradeLogBuy')) {
+    trade.tradeLogBuy = JSON.parse(localStorage.getItem('shibTradeLogBuy'));
 }
 
-if(localStorage.getItem('btcTradeLogSell')) {
-    trade.tradeLogSell = JSON.parse(localStorage.getItem('btcTradeLogSell'));
+if(localStorage.getItem('shibTradeLogSell')) {
+    trade.tradeLogSell = JSON.parse(localStorage.getItem('shibTradeLogSell'));
 }
 
 trade.tradeLogBuy.map((log) => {
@@ -117,7 +117,7 @@ trade.tradeLogSell.map((log) => {
     logTableSell.appendChild(tr);
 })
 
-const btcPriceDOM = document.querySelector('.coin-price');
+const shibPriceDOM = document.querySelector('.coin-price');
 
 const buyAmountInput = document.querySelector('.amount-input-buy');
 const buyTotalPriceInput = document.querySelector('.total-price-input-buy');
@@ -125,34 +125,34 @@ const buyTotalPriceInput = document.querySelector('.total-price-input-buy');
 const sellAmountInput = document.querySelector('.amount-input-sell');
 const sellTotalPriceInput = document.querySelector('.total-price-input-sell');
 
-
 setInterval(() => {
     trade.coins.map((coin) => {
         let coinsLastPrice = coin.price
 
-        if(coin.symbol == "BTC-USDT") {
+        if(coin.symbol == "SHIB-USDT") {
             coin.price += (Math.random() * ((coin.price * 0.5) / 100)) - (Math.random() * ((coin.price * 0.49) / 100));
-            btcPriceDOM.textContent = `$ ${coin.price.toFixed(2)}`;
+
+            shibPriceDOM.textContent = `$ ${coin.price.toFixed(9)}`;
 
             if(coin.price > coinsLastPrice) {
-                btcPriceDOM.classList.remove('decreasing');
-                btcPriceDOM.classList.add('increasing');
+                shibPriceDOM.classList.remove('decreasing');
+                shibPriceDOM.classList.add('increasing');
             } else {
-                btcPriceDOM.classList.remove('increasing');
-                btcPriceDOM.classList.add('decreasing');
+                shibPriceDOM.classList.remove('increasing');
+                shibPriceDOM.classList.add('decreasing');
             }
 
-        }
+      }
     })
     localStorage.setItem('coins', JSON.stringify(trade.coins));
 
-}, 1000);
+}, 1000)
 
 setInterval(() => {
     trade.coins.map((coin) => {
-        if(coin.symbol == "BTC-USDT") {
-            buyAmountInput.value = (buyTotalPriceInput.value / coin.price).toFixed(6);
-            sellTotalPriceInput.value = (sellAmountInput.value * coin.price).toFixed(2);
+        if(coin.symbol == "SHIB-USDT") {
+            buyAmountInput.value = (buyTotalPriceInput.value / coin.price).toFixed(2);
+            sellTotalPriceInput.value = (sellAmountInput.value * coin.price).toFixed(6);
         }
     })
 
@@ -186,10 +186,10 @@ buyPercentages.forEach((p) => {
         }
 
         trade.coins.map((coin) => {
-            if(coin.symbol == "BTC-USDT") {
+            if(coin.symbol == "SHIB-USDT") {
                 let money = JSON.parse(localStorage.getItem('cryptoMoney'));
 
-                buyAmountInput.value = (((money / coin.price) * percentage) / 100).toFixed(6);
+                buyAmountInput.value = (((money / coin.price) * percentage) / 100).toFixed(2);
                 buyTotalPriceInput.value = ((money * percentage) / 100).toFixed(2);
             }
         })
@@ -220,8 +220,8 @@ sellPercentages.forEach((p) => {
         }
 
         trade.coins.map((coin) => {
-            if(coin.symbol == "BTC-USDT") {
-                sellAmountInput.value = ((coin.amount * percentage) / 100).toFixed(6);
+            if(coin.symbol == "SHIB-USDT") {
+                sellAmountInput.value = ((coin.amount * percentage) / 100).toFixed(2);
                 sellTotalPriceInput.value = (sellAmountInput.value * coin.price).toFixed(2);
             }
         })
@@ -234,17 +234,16 @@ const moneyDOM = document.querySelector('.current-money');
 
 updateTotalPrice = (e) => {
     trade.coins.map((coin) => {
-        if(coin.symbol == "BTC-USDT") {
-            buyTotalPriceInput.value = (e.target.value * coin.price).toFixed(2);
+        if(coin.symbol == "SHIB-USDT") {
+            buyTotalPriceInput.value = (e.target.value * coin.price).toFixed(6);
         }
     })
 
-    console.log(trade.coins);
 }
 updateTotalPriceSell = (e) => {
     trade.coins.map((coin) => {
-        if(coin.symbol == "BTC-USDT") {
-            sellTotalPriceInput.value = (e.target.value * coin.price).toFixed(2);
+        if(coin.symbol == "SHIB-USDT") {
+            sellTotalPriceInput.value = (e.target.value * coin.price).toFixed(6);
         }
     })
 }
@@ -254,16 +253,16 @@ sellAmountInput.addEventListener('keyup', updateTotalPriceSell);
 
 updateAmount = (e) => {
     trade.coins.map((coin) => {
-        if(coin.symbol == "BTC-USDT") {
-            buyAmountInput.value = (e.target.value / coin.price).toFixed(6);
+        if(coin.symbol == "SHIB-USDT") {
+            buyAmountInput.value = (e.target.value / coin.price).toFixed(2);
         }
     })
 }
 
 updateAmountSell = (e) => {
     trade.coins.map((coin) => {
-        if(coin.symbol == "BTC-USDT") {
-            sellAmountInput.value = (e.target.value / coin.price).toFixed(6);
+        if(coin.symbol == "SHIB-USDT") {
+            sellAmountInput.value = (e.target.value / coin.price).toFixed(2);
         }
     })
 }
@@ -274,12 +273,12 @@ sellTotalPriceInput.addEventListener('keyup', updateAmountSell);
 let money = parseInt(localStorage.getItem('cryptoMoney'));
 moneyDOM.textContent = `${money.toFixed(2)} USDT`;
 
-const currentBtcDOM = document.querySelector('.current-coin');
+const currentShibDOM = document.querySelector('.current-coin');
 
 trade.coins.map((coin) => {
-    if(coin.symbol == "BTC-USDT") {
-        currentBtcDOM.innerHTML = `${coin.amount.toFixed(6)} Btc`;
-        btcPriceDOM.innerHTML = `$ ${coin.price.toFixed(2)}`;
+    if(coin.symbol == "SHIB-USDT") {
+        currentShibDOM.innerHTML = `${coin.amount.toFixed(2)} SHIB`;
+        shibPriceDOM.innerHTML = `$ ${coin.price.toFixed(2)}`;
     }
 })
 
@@ -296,10 +295,10 @@ buy = (e) => {
     let coinPrice = "";
 
     trade.coins.map((coin) => {
-        if(coin.symbol == "BTC-USDT") {
+        if(coin.symbol == "SHIB-USDT") {
             coinPrice = coin.price;
 
-            amount = (price / coinPrice).toFixed(6);
+            amount = (price / coinPrice).toFixed(2);
         }
     });
 
@@ -318,12 +317,12 @@ buy = (e) => {
         money -= price;
     
         trade.coins.map((coin) => {
-            if (coin.symbol == "BTC-USDT") {
+            if (coin.symbol == "SHIB-USDT") {
                 coin.amount = JSON.parse(coin.amount) + JSON.parse(amount);
                 coin.isUserHave = true;
 
             trade.tradeLogBuy.unshift({
-                price: coin.price.toFixed(2),
+                price: coin.price.toFixed(9),
                 symbol: coin.symbol,
                 totalPrice: price,
                 amount: amount,
@@ -336,16 +335,16 @@ buy = (e) => {
             tr.innerHTML = `
                 <td class="log-thead-td log-date">${date}</td>
                 <td class="log-thead-td log-symbol">${coin.symbol}</td>
-                <td class="log-thead-td log-price">${coin.price.toFixed(2)}</td>
+                <td class="log-thead-td log-price">${coin.price.toFixed(9)}</td>
                 <td class="log-thead-td log-amount">${amount}</td>
                 <td class="log-thead-td log-total-price">${price} USDT</td>
             `;
 
-            currentBtcDOM.innerHTML = `${coin.amount.toFixed(6)} Btc`;
+            currentShibDOM.innerHTML = `${coin.amount.toFixed(2)} SHIB`;
 
             logTableBuy.prepend(tr);
 
-            localStorage.setItem('btcTradeLogBuy', JSON.stringify(trade.tradeLogBuy));
+            localStorage.setItem('shibTradeLogBuy', JSON.stringify(trade.tradeLogBuy));
         }
         });
     } else {
@@ -370,10 +369,10 @@ sell = (e) => {
     let coinPrice = "";
 
     trade.coins.map((coin) => {
-        if(coin.symbol == "BTC-USDT") {
+        if(coin.symbol == "SHIB-USDT") {
             coinPrice = coin.price;
 
-            price = (amount * coinPrice).toFixed(2);
+            price = (amount * coinPrice).toFixed(9);
         }
     });
 
@@ -389,7 +388,7 @@ sell = (e) => {
     let date = `${day}.${month}.${year} ${h}:${m}`;
 
     trade.coins.map((coin) => {
-        if (coin.symbol == "BTC-USDT") {
+        if (coin.symbol == "SHIB-USDT") {
             if(parseInt(amount) <= coin.amount) {
                 coin.amount = JSON.parse(coin.amount) - JSON.parse(amount);
                 money = parseInt(money) + parseInt(price);
@@ -399,7 +398,7 @@ sell = (e) => {
                 }
 
                 trade.tradeLogSell.unshift({
-                    price: coin.price.toFixed(2),
+                    price: coin.price.toFixed(9),
                     symbol: coin.symbol,
                     totalPrice: price,
                     amount: amount,
@@ -412,17 +411,17 @@ sell = (e) => {
                 tr.innerHTML = `
                     <td class="log-thead-td log-date">${date}</td>
                     <td class="log-thead-td log-symbol">${coin.symbol}</td>
-                    <td class="log-thead-td log-price">${coin.price.toFixed(2)}</td>
+                    <td class="log-thead-td log-price">${coin.price.toFixed(9)}</td>
                     <td class="log-thead-td log-amount">${amount}</td>
                     <td class="log-thead-td log-total-price">${price} USDT</td>
                 `;
 
                 logTableSell.prepend(tr);
 
-                localStorage.setItem('btcTradeLogSell', JSON.stringify(trade.tradeLogSell));
+                localStorage.setItem('shibTradeLogSell', JSON.stringify(trade.tradeLogSell));
 
-                currentBtcDOM.textContent = `${coin.amount.toFixed(6)} BTC`;
-                moneyDOM.textContent = `${money.toFixed(2)} USDT`
+                currentShibDOM.textContent = `${coin.amount.toFixed(2)} SHIB`;
+                moneyDOM.textContent = `${money.toFixed(2)} USDT`;
             } else {
                 alert('Not enough Bitcoin');
             }
