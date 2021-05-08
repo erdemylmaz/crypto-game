@@ -232,7 +232,7 @@ setInterval(() => {
             let differenceNumber = (coin.price - coin.lastPrice);
             let differencePercentage = ((differenceNumber / coin.price) * 100).toFixed(2);
 
-            ripplePriceDOM.innerHTML = `<div style="width: 128px; display: inline-flex;">$ ${coin.price.toFixed(2)}</div> <div style="margin-left: 8px;" class="${coin.symbol}-difference">${differencePercentage}%</div>`;
+            ripplePriceDOM.innerHTML = `<div style="width: 128px; display: inline-flex;">$ ${coin.price.toFixed(4)}</div> <div style="margin-left: 8px;" class="${coin.symbol}-difference">${differencePercentage}%</div>`;
             let DOM = document.querySelector(`.${coin.symbol}-difference`);
             DOM.style.width = "64px";
             DOM.style.textAlign = "center";
@@ -262,7 +262,7 @@ setInterval(() => {
             let differenceNumber = (coin.price - coin.lastPrice);
             let differencePercentage = ((differenceNumber / coin.price) * 100).toFixed(2);
 
-            tronPriceDOM.innerHTML = `<div style="width: 128px; display: inline-flex;">$ ${coin.price.toFixed(2)}</div> <div style="margin-left: 8px;" class="${coin.symbol}-difference">${differencePercentage}%</div>`;
+            tronPriceDOM.innerHTML = `<div style="width: 128px; display: inline-flex;">$ ${coin.price.toFixed(5)}</div> <div style="margin-left: 8px;" class="${coin.symbol}-difference">${differencePercentage}%</div>`;
             let DOM = document.querySelector(`.${coin.symbol}-difference`);
             DOM.style.width = "64px";
             DOM.style.textAlign = "center";
@@ -515,7 +515,7 @@ window.addEventListener('load', () => {
             let differenceNumber = (coin.price - coin.lastPrice);
             let differencePercentage = ((differenceNumber / coin.price) * 100).toFixed(2);
 
-            ripplePriceDOM.innerHTML = `<div style="width: 128px; display: inline-flex;">$ ${coin.price.toFixed(2)}</div> <div style="margin-left: 8px;" class="${coin.symbol}-difference">${differencePercentage}%</div>`;
+            ripplePriceDOM.innerHTML = `<div style="width: 128px; display: inline-flex;">$ ${coin.price.toFixed(4)}</div> <div style="margin-left: 8px;" class="${coin.symbol}-difference">${differencePercentage}%</div>`;
             let DOM = document.querySelector(`.${coin.symbol}-difference`);
             DOM.style.width = "64px";
             DOM.style.textAlign = "center";
@@ -545,7 +545,7 @@ window.addEventListener('load', () => {
             let differenceNumber = (coin.price - coin.lastPrice);
             let differencePercentage = ((differenceNumber / coin.price) * 100).toFixed(2);
 
-            tronPriceDOM.innerHTML = `<div style="width: 128px; display: inline-flex;">$ ${coin.price.toFixed(2)}</div> <div style="margin-left: 8px;" class="${coin.symbol}-difference">${differencePercentage}%</div>`;
+            tronPriceDOM.innerHTML = `<div style="width: 128px; display: inline-flex;">$ ${coin.price.toFixed(5)}</div> <div style="margin-left: 8px;" class="${coin.symbol}-difference">${differencePercentage}%</div>`;
             let DOM = document.querySelector(`.${coin.symbol}-difference`);
             DOM.style.width = "64px";
             DOM.style.textAlign = "center";
@@ -919,6 +919,24 @@ resetGame = () => {
 
         localStorage.removeItem('shibTradeLogBuy');
         localStorage.removeItem('shibTradeLogSell');
+
+        localStorage.removeItem('ethTradeLogBuy');
+        localStorage.removeItem('ethTradeLogSell');
+
+        localStorage.removeItem('xrpTradeLogBuy');
+        localStorage.removeItem('xrpTradeLogSell');
+
+        localStorage.removeItem('dotTradeLogBuy');
+        localStorage.removeItem('dotTradeLogSell');
+        
+        localStorage.removeItem('tronTradeLogBuy');
+        localStorage.removeItem('tronTradeLogSell');
+
+        localStorage.removeItem('liteTradeLogBuy');
+        localStorage.removeItem('liteTradeLogSell');
+
+        localStorage.removeItem('fetTradeLogBuy');
+        localStorage.removeItem('fetTradeLogSell');
 
         localStorage.removeItem('coins');
         localStorage.setItem('coins', JSON.stringify(coins.coins));

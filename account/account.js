@@ -99,7 +99,14 @@ portfolio.currentCoins.map((coin) => {
                 <td class="coin-total-price ${coin.name}-total">$ ${(coinsTotalPrice).toFixed(2)}</td>
                 <td class="coin-buy-sell"><a href="../${coin.symbol}/trade.html" class="buy-btn">Buy / Sell</a></td>
             `;
-
+        } else if (coin.name == "Lite-Coin") {
+            tr.innerHTML = `
+                <td class="coin-symbol">${coin.symbol}</td>
+                <td class="name-td coin-td"><img src="../images/${coin.name}.png" class="coin-img">${coin.name}</td>
+                <td class="coin-amount">${coin.amount.toFixed(4)}</td>
+                <td class="coin-total-price ${coin.name}-total">$ ${(coinsTotalPrice).toFixed(2)}</td>
+                <td class="coin-buy-sell"><a href="../${coin.symbol}/trade.html" class="buy-btn">Buy / Sell</a></td>
+            `;
         }
 
         coinsTable.appendChild(tr);

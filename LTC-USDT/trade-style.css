@@ -232,10 +232,14 @@ tbody tr:hover {
     color: #F20519;
 }
 
-.bright .current-doge {
+.bright .current-coin {
     text-align: right;
     color: black;
     margin-right: 8px;
+}
+
+.bright .coin-price {
+    color: black;
 }
 
 .current-coin {
@@ -282,6 +286,23 @@ tbody tr:hover {
 .bright .p:hover {
     background-color: rgba(0, 0, 0, 0.1);
 }
-.bright .coin-price {
-    color: black;
+
+.selectedPercentageBuy {
+    background-color: #00C206;
+    color: #4a4a4a;
+}
+
+.bright .selectedPercentageBuy {
+    background-color: #00B300;
+    color: white;
+}
+
+.selectedPercentageSell {
+    background-color: #E01200;
+    color: #4a4a4a;
+}
+
+.bright .selectedPercentageSell {
+    background-color: #F20519;
+    color: white;
 }

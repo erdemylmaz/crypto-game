@@ -279,7 +279,7 @@ const currentDogeDOM = document.querySelector('.current-doge');
 
 trade.coins.map((coin) => {
     if(coin.symbol == "DOGE-USDT") {
-        currentDogeDOM.innerHTML = `${coin.amount.toFixed(2)} Doge`;
+        currentDogeDOM.innerHTML = `${coin.amount.toFixed(2)} DOGE`;
         dogePriceDOM.innerHTML = `$ ${coin.price.toFixed(5)}`;
     }
 })
@@ -342,7 +342,7 @@ buy = (e) => {
                 <td class="log-thead-td log-total-price">${price} USDT</td>
             `;
 
-            currentDogeDOM.innerHTML = `${coin.amount.toFixed(2)} Doge`;
+            currentDogeDOM.innerHTML = `${coin.amount.toFixed(2)} DOGE`;
 
             logTableBuy.prepend(tr);
 
@@ -422,7 +422,7 @@ sell = (e) => {
 
                 localStorage.setItem('dogeTradeLogSell', JSON.stringify(trade.tradeLogSell));
 
-                currentDogeDOM.textContent = `${coin.amount.toFixed(2)} Doge`;
+                currentDogeDOM.textContent = `${coin.amount.toFixed(2)} DOGE`;
                 moneyDOM.textContent = `${money.toFixed(2)} USDT`
             } else {
                 alert('Not enough Doge');
