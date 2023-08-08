@@ -397,3 +397,7 @@ thead tr td {
   justify-self: center;
   align-items: center;
 }
+
+thead {
+  font-weight: bold;
+}
