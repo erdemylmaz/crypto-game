@@ -1,11 +1,20 @@
 :root {
-    --blue: #5271ff;
-    --darkBlue: #5271ff88;
+    --green: #00b415;
+    --greenHover: #00b41599;
+    --red: #E03132;
+    --redHover: #E03132aa;
+    --blue: #1A71C2;
+    --darkBlue: #1A71C2;
     --mainBackground: rgb(241, 243, 245);
     --background: rgb(246, 249, 252);
-    --background2: #FAFBFC;
-    --hoverBlue: rgb(10, 70, 228);
-    --brightBlue: rgb(22, 82, 240);
+    --background2: #fafbfc;
+    --hoverBlue: #1A71C2AA;
+    --brightBlue: #1A71C2;
+}
+
+img {
+    width: 0px;
+    height: 0px;
 }
 
 .trade-area {
@@ -69,15 +78,15 @@
 }
 
 .bright .sell-category-btn {
-    background-color: #00B30077;
+    background-color: var(--green);
 }
 
 .bright .sell-category-btn:hover {
-    background-color: #00B300;
+    background-color: var(--greenHover);
 }
 
 .bright .buy-active {
-    background-color: #00B300;
+    background-color: var(--green);
 }
 
 .sell-category-btn {
@@ -96,15 +105,15 @@
 }
 
 .bright .sell-category-btn {
-    background-color: #F2051977;
+    background-color: var(--red);
 }
 
 .bright .sell-category-btn:hover {
-    background-color: #F20519;
+    background-color: var(--redHover);
 }
 
 .bright .sell-active {
-    background-color: #F20519;
+    background-color: var(--red);
 }
 
 input {
@@ -129,7 +138,7 @@ input[value="Buy!"] {
     width: 264px;
 
     background-color: transparent;
-    border: 1px solid #00C206;
+    border: 1px solid var(-green);
     color: white;
 
     transition: 500ms;
@@ -138,7 +147,7 @@ input[value="Buy!"] {
 
 .bright input[value="Buy!"] {
     color: black;
-    border: 1px solid #00B300;
+    border: 1px solid var(--green);
 }
 
 input[value="Sell!"] {
@@ -159,24 +168,24 @@ input[value="Sell!"]:hover {
 
 .bright input[value="Sell!"] {
     color: black;
-    border: 1px solid #F20519;
+    border: 1px solid var(--red);
 }
 
 .bright input[value="Sell!"]:hover {
-    background-color: #F20519;
+    background-color: var(--redHover);
     color: white;
     border: 1px solid white;
 }
 
 .bright .buy-submit:hover {
     border: 1px solid white;
-    background-color: #00B300;
+    background-color: var(--green);
     color: white;
 }
 
 .buy-submit:hover {
     border: 1px solid black;
-    background-color: #00C206;
+    background-color: var(--greenHover);
     cursor: pointer;
 }
 
@@ -221,15 +230,15 @@ tbody tr:hover {
 }
 
 .bright .buy-log-table tbody .log-amount {
-    color: #00B300;
+    color: var(--green);
 }
 
 .sell-log-table tbody .log-amount {
-    color: #E01200;
+    color: var(--red);
 }
 
 .bright .sell-log-table tbody .log-amount {
-    color: #F20519;
+    color: var(--red);
 }
 
 .bright .current-coin {
@@ -249,7 +258,7 @@ tbody tr:hover {
 }
 
 .sell-submit {
-    border: 1px solid #E01200;
+    border: 1px solid var(--red);
     width: 10403491px;
 }
 
@@ -293,16 +302,16 @@ tbody tr:hover {
 }
 
 .bright .selectedPercentageBuy {
-    background-color: #00B300;
+    background-color: var(--green);
     color: white;
 }
 
 .selectedPercentageSell {
-    background-color: #E01200;
+    background-color: var(--red);
     color: #4a4a4a;
 }
 
 .bright .selectedPercentageSell {
-    background-color: #F20519;
+    background-color: var(--red);
     color: white;
 }

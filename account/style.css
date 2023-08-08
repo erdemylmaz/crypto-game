@@ -1,11 +1,24 @@
 :root {
-    --blue: #5271ff;
-    --darkBlue: #5271ff55;
+    --green: #00b415;
+    --greenHover: #00b41599;
+    --red: #E03132;
+    --redHover: #E03132aa;
+    --blue: #1A71C2;
+    --darkBlue: #1A71C2;
     --mainBackground: rgb(241, 243, 245);
     --background: rgb(246, 249, 252);
-    --background2: #FAFBFC;
-    --hoverBlue: rgb(10, 70, 228);
-    --brightBlue: rgb(22, 82, 240);
+    --background2: #fafbfc;
+    --hoverBlue: #1A71C2AA;
+    --brightBlue: #1A71C2;
+}
+
+ * {
+    transition: 1000ms;
+ }
+
+img {
+    width: 0px;
+    height: 0px;
 }
 
 .logo {
